@@ -6,9 +6,9 @@ Sprint 2014
 
 Authors:
 
-	Christopher Compton	christopher.j.compton@gmail.com
-	Jacob Nappi 		jacobmathewnappi@gmail.com
-	Thu Tran		thu.tran10@yahoo.com
+	Christopher Compton		christopher.j.compton@gmail.com
+	Jacob Nappi 			jacobmathewnappi@gmail.com
+	Thu Tran				thu.tran10@yahoo.com
 
 Description:
 
