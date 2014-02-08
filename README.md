@@ -29,3 +29,5 @@ etc.
 
 Cited sources of open sourced code we used to accomplish the
 various goals of our project.
+
+http://www.code-sucks.com/code/javascript/template.php?tutorial=basic_calendar.php
