@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!--
+Page  : calendar.html
+author: Jacob Nappi
+email : Jacob_Nappi@student.uml.edu
+
+The purpose of this page is to dynamically create a calendar that will show open
+days for users to make appointments with their selected employees. 
+
+Created      : 02-10-14 JMN
+Last Modified: 02-10-14 JMN
+-->
+<html>
+    <head>
+        <title>Appointment Selection Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <style>  
+            .currentmonth{  
+                color: blue;  
+                text-align: center;  
+            }  
+            .currentday{  
+                border: 1px solid black;  
+                color: #00FF00;  
+                text-align: center;  
+            }
+            /*http://www.w3schools.com/css/css_table.asp*/
+            .calendarDiv{
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                background-color: lightblue;
+                margin-left: 40px;
+                margin-right: 40px;
+                border: 1px solid black;
+            }
+            .calendarTable{
+                border: 3px solid black;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+
+            }
+            .calendarHeading{
+                border: 2px solid black;
+                text-align: center;
+                color: red;
+                width: 250px;
+            }
+            .calendarDay{
+                border: 1px solid black;
+                color: green;
+                width: 250px;
+                height: 100px;
+            }
+        </style>  
+        <!--
+        Load jQuery library from the Google content Delivery Network (CDN)
+        see http://encosia.com/3-reasons-why-you-should-let-google-host-jquery-for-you/
+        jQuery can also be downloaded and stored locally from
+            http://jquery.com/download/
+        -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script language="JavaScript">
+            jQuery(document).ready(function() {
+                buildCalendar();
+            });
+        </script>
+        <script language="JavaScript">
+            function buildCalendar() {
+                var content = "";
+                var dayNum = 1; //used for enumerating days on the calendar
+                var current = new Date();
+                var month = current.getMonth(); //returns month from 0-11
+                var day = current.getDate(); //returns day from 1-31
+                var weekDay = current.getDay();//returns a day num from 0-6
+                var year = current.getFullYear(); //returns four digit year
+
+                var foundFirst = 0;//boolean used for correct day printing on calendar
+
+                //We need certain information about the first of the month
+                //  Found this site especially helpful:
+                //  http://stackoverflow.com/questions/13571700/get-first-and-last-date-of-current-month-with-javascript-or-jquery
+                //  And this: http://www.w3schools.com/jsref/jsref_obj_date.asp
+                var firstOfMonth = new Date(current.getFullYear(), current.getMonth(), 1);
+
+                //Need to figure out how many days are in February
+                //leap year check
+                if ((year % 100 != 0) && (year % 4 == 0) || (year % 400 == 0)) {
+                    totalFeb = 29;
+                }
+                //Boring normal year
+                else {
+                    totalFeb = 28;
+                }
+
+                //Need to know how many days are in the month, initialize this array
+                var totalDays = [31, totalFeb, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+                //Lets initialize the calendar with the apropriate headings
+                content += "<table class=\"calendarTable\">";
+                content += "<tr>";
+                content += "<th class=\"calendarHeading\">" + "SUNDAY" + "</th>";
+                content += "<th class=\"calendarHeading\">" + "MONDAY" + "</th>";
+                content += "<th class=\"calendarHeading\">" + "TUESDAY" + "</th>";
+                content += "<th class=\"calendarHeading\">" + "WEDNESDAY" + "</th>";
+                content += "<th class=\"calendarHeading\">" + "THURSDAY" + "</th>";
+                content += "<th class=\"calendarHeading\">" + "FRIDAY" + "</th>";
+                content += "<th class=\"calendarHeading\">" + "SATURDAY" + "</th>";
+                content += "</tr>";
+
+                //Time to start placing days. Numbered days should match an actual calendar
+                for (var weekCounter = 0; weekCounter < 5; weekCounter++)
+                {
+                    content += "<tr>";//start the current 'week'
+                    for (var dayCounter = 0; dayCounter < 7; dayCounter++)
+                    {
+                        //To make sure we get the first day of the month right
+                        if (foundFirst === 0 && dayCounter !== firstOfMonth.getDay())
+                        {
+                            content += "<td class=\"calendarDay\" onmouseover=\"ChangeColor(this, true)\" onmouseout=\"ChangeColor(this, false)\"></td>";
+                            continue;
+                        }
+                        //So we don't print days into the calendar that don't exist
+                        if (dayNum > totalDays[month])
+                        {
+                            break;
+                        }
+                        //Set the foundFirst boolean to signify we have printed the correct
+                        //first day of the month
+                        foundFirst = 1;
+                        content += "<td class=\"calendarDay\" onmouseover=\"ChangeColor(this, true)\" onmouseout=\"ChangeColor(this, false)\">" + dayNum + "</td>";
+                        //content += "<td class=\"calendarDay\">" + dayNum + "</td>";
+                        dayNum++;
+                    }
+                    content += "</tr>";//End the current 'week'
+                }
+                //Throw our HTML into the calendar div
+                jQuery(".calendarDiv").html(content);
+            }
+            
+            //This function is used to highlight the day that the user is trying
+            //to select. Found here:
+            //http://imar.spaanjaars.com/312/how-do-i-make-a-full-table-row-clickable
+            function ChangeColor(tableRow, highLight)
+            {
+                if (highLight)
+                {
+                    //This is the color of the highlighted cell
+                    tableRow.style.backgroundColor = '#dcfac9';
+                }
+                else
+                {
+                    //This is what the color returns to when not hovered over
+                    tableRow.style.backgroundColor = 'lightblue';
+                }
+            }
+        </script>
+
+    </head>
+    <body onLoad="buildCalendar()">
+        <div class="calendarDiv"></div>
+    </body>
+</html>
