@@ -1,18 +1,35 @@
 <!DOCTYPE html>
 <!--
+  form.html
   Christopher Compton
   christopher.j.compton@gmail.com
   christopher_compton@student.uml.edu
   Undergraduate Student at UMass Lowell
   91.462 GUI Programming II
+
+  Created on 02-13-2014 CJC
 -->
 <html>
   <head>
-    <title>BookIt</title>
+    <title>Book-It</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!-- 
+    jQuery Idle Timer source code from 
+    https://github.com/mikesherov/jquery-idletimer
+    -->
+    <script src="js/jquery-idletimer.js"></script>
+    <script src="js/idle-timer.js"></script>
+    <script type="text/javascript">
+      jQuery( document ).ready( function(){
+        checkIdle();
+      } );
+    </script>
   </head>
   <body>
+    <!-- Initialize to 2 minutes -->
+    <div id="countdown">2:00</div>
     <div>
       <fieldset>
         <legend>Appointment Application</legend>
