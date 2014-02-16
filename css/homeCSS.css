@@ -1,0 +1,115 @@
+/* 
+ * File: /~ttran/css/homeCSS.css
+ * Authors: C. Compton, J. Nappi,T. Tran, UMass Lowell CompSci Students
+ * Course: GUI Programming 2
+ * Email: christopher.j.compton@gmail.com, jacobmathewnappi@gmail.com,
+ * thu_tran2@student.uml.edu
+ * Description: Styles home page of Book-It. Purpose of the style sheet follows. 
+ * Updated: February 11, 2014
+ * (Documentation is a modification of Jesse Heines's work.)
+ */
+
+
+/* Sets the contents of top div containing banner and navigation menu. */
+#top 
+{
+  height: 150px;
+  width: 800px;
+  margin: 0 auto;
+}
+
+/* Sets the properties to the customer login button. */
+input
+{
+  float: right;
+  font: 12px "Tohoma", "Helvetica", "sans-serif";
+  font-weight: bold; 
+  width: 80px;
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+}
+
+/* Container of employee profiles */
+div.employee
+{
+  width: 800px;
+  height: 500px;
+  margin: 0 auto;
+  position: relative;
+  padding: 10px;
+}
+
+/* Container of individual employee profile */
+div.emplyProfile
+{
+  display: inline-block;
+  width: 30%;
+  margin: auto;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+/* Set properties to employee pictures*/
+img.pic
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+h1, h2, h3
+{
+  text-align: center;
+}
+
+h2
+{
+  padding: 0px;
+  margin-top: -20px;
+}
+
+h3
+{
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
+
+/* Sets the <ul> tags properties for the navigation links menu. */
+ul.nav 
+{
+  height: 37px;
+  width: 800px;
+  padding: 0;
+  top: 0;
+  font: 15px "Tahoma", "Helvetica", "sans-serif";
+  background-color: white;
+  list-style: none;
+  text-align: center;
+}
+
+/* Sets the properties for the navigation links menu. */
+li.nav 
+{
+  display: inline-block; /* Align the navigation links side by side. */
+  padding-right: 10px;
+  border-right: 1px solid #213C63; /* solid red line betweeen navigation links. */
+}
+
+/* Sets the properties to the bottom navigation links. */
+#footer
+{
+  width: 800px;
+  padding: 10px;
+  margin: 0 auto;
+  bottom: 0px;
+}
+
+
+
+
