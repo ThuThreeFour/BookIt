@@ -19,6 +19,9 @@
     jQuery Idle Timer source code from 
     https://github.com/mikesherov/jquery-idletimer
     -->
+    <link rel="stylesheet" href="development-bundle/themes/cupertino/jquery.ui.all.css">
+    <link rel="stylesheet" href="css/cupertino/jquery-ui-1.10.4.custom.css">
+    <link rel="stylesheet" href="css/jquery.ui.form.css">
     <script src="js/jquery-idletimer.js"></script>
     <script src="js/idle-timer.js"></script>
     <script type="text/javascript">
@@ -29,25 +32,25 @@
   </head>
   <body>
     <!-- Initialize to 2 minutes -->
-    <div id="countdown">2:00</div>
-    <div>
-      <fieldset>
-        <legend>Appointment Application</legend>
-        <form>
-          <p>
-            <label>First Name: </label><input type="text">
-          </p>
-          <p>
-            <label>Last Name: </label><input type="text">
-          </p>
-          <p>
-            <label>Phone: </label><input type="text">
-          </p>
-          <p>
-            <label>E-Mail: </label><input type="text">
-          </p>
+    <div class="ui-widget ui-form">
+      <div class="ui-widget-content ui-corner-all">
+        <div class="ui-widget-header ui-corner-all">
+             <h2>Appointment Form</h2>
+        </div>
+        <form action="#" class="ui-helper-clearfix">
+          <label>Name</label>
+          <div class="ui-state-error ui-corner-all">
+            <input type="text">
+            <div class="ui-icon ui-icon-alert"></div>
+            <p class="ui-helper-reset ui-state-error-text">Required field</p>
+          </div>
         </form>
-      </fieldset>
+      </div>
+      <div class="ui-widget-content ui-corner-all">
+        <div class="ui-widget-header ui-corner-all">
+          <h3 id="countdown">2:00</h3>
+        </div>
+      </div>
     </div>
   </body>
 </html>
