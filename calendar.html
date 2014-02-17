@@ -9,14 +9,19 @@ days for users to make appointments with their selected employees.
 
 Created      : 02-10-14 JMN
 Last Modified: 02-10-14 JMN
-               02-16-14 CJC : Formatting 
+               02-16-14 CJC : Formatting. Moved CSS and JavaScript to
+                              separate files.
 -->
 <html>
   <head>
     <title>Appointment Selection Page</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="css/calendar.css">  
+    <!--
+      <link rel="stylesheet" href="css/calendar.css">
+    -->
+    <link rel="stylesheet" href="development-bundle/themes/pepper-grinder/jquery.ui.all.css">
+    <link rel="stylesheet" href="css/pepper-grinder/jquery-ui-1.10.4.custom.css">
     <!--
     Load jQuery library from the Google content Delivery Network (CDN)
     see http://encosia.com/3-reasons-why-you-should-let-google-host-jquery-for-you/

@@ -44,6 +44,10 @@ function buildCalendar( date ){
     "May", "June", "July", "August", "September", "October",
     "November", "December" ];
 
+  content += "<div class='ui-widget ui-calendar'>";
+  content += "<div class='ui-widget-content ui-corner-all'>";
+  content += "<div class='ui-widget-header ui-corner-all'>";
+  content += "<h2>"+monthNames[currentCalendarDate.getMonth()] + " " + currentCalendarDate.getFullYear()+"</h2></div>";
   //Start the table
   content += "<table class=\"calendarTable\">";
 
@@ -62,9 +66,9 @@ function buildCalendar( date ){
     }
     else if ( i === 3 ) //This is the column where we will place the month and year
     {
-      content += "<th id=\"calendarMonthName\">";
-      content += monthNames[currentCalendarDate.getMonth()] + " " + currentCalendarDate.getFullYear();
-      content += "</th>";
+      //content += "<th id=\"calendarMonthName\">";
+      //content += monthNames[currentCalendarDate.getMonth()] + " " + currentCalendarDate.getFullYear();
+      //content += "</th>";
     }
     else if ( i === 6 ) //This is where we will place the NEXT button for the next month
     {
@@ -132,7 +136,7 @@ function buildCalendar( date ){
   }
 
   content += "</table>";//End the table
-
+  content += "</div></div>";
   //Throw our HTML into the calendar div
   jQuery( ".calendarDiv" ).html( content );
 }

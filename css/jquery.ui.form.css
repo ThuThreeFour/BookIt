@@ -13,12 +13,19 @@
   margin: 10px 0 10px 20px;
 }
 
+.ui-form .ui-widget-header h3{
+  margin: 10px 45%;
+}
+
 .ui-form .ui-widget-content{
   padding: 5px;
 }
-
-.ui-form label, .ui-form input, .ui-form .ui-state-error, .ui-form .ui-icon, .ui-form .ui-state-error p{
+.ui-form label{
   float: left;
+}
+
+.ui-form input, .ui-form .ui-state-error, .ui-form .ui-icon, .ui-form .ui-state-error p{
+  float: right;
 }
 
 .ui-form label, .ui-state-error p{
