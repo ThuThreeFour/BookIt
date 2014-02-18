@@ -1,0 +1,58 @@
+{
+  "employees": [ 
+    {
+      "img" : "images/ccPic.png", 
+      "firstName" : "Chris", 
+      "jobTitle" : "Job Title",
+      "expertiseList" : { 
+        "expertise" : [
+          [
+            "Expertise 1"
+          ],
+          [
+            "Expertise 2"
+          ],
+          [
+            "Expertise 3"
+          ]
+        ]
+      }
+    },
+    {
+      "img" : "images/ttPic.png", 
+      "firstName" : "Thu", 
+      "jobTitle" : "Job Title",
+            "expertiseList" : { 
+        "expertise" : [
+          [
+            "Expertise 1"
+          ],
+          [
+            "Expertise 2"
+          ],
+          [
+            "Expertise 3"
+          ]
+        ]
+      }
+    },
+    {
+      "img" : "images/jnPic.png",
+      "firstName" : "Jacob", 
+      "jobTitle" : "Job Title",
+            "expertiseList" : { 
+        "expertise" : [
+          [
+            "Expertise 1"
+          ],
+          [
+            "Expertise 2"
+          ],
+          [
+            "Expertise 3"
+          ]
+        ]
+      }
+    }
+    ]
+}
