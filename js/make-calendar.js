@@ -5,14 +5,70 @@
  */
 var currentDate = new Date(); //Need to always know the current date
 var currentCalendarDate = currentDate;//Used to help with previous and next buttons
+var tableBackgroundColor; //Used so our table highlighting doesn't break if we change styles in the future
+//Need this so we can label the month on the calendar and on the dialog popup for the day
+var monthNames = ["January", "February", "March", "April",
+  "May", "June", "July", "August", "September", "October",
+  "November", "December"];
 
-function buildCalendar( date ){
+//This function will populate a jQuery dialog box with all times for the selected day
+function buildDay(year, month, dayNum) {
+  var content = "";
+
+  content += "<div class='ui-widget ui-calendar-day'>";
+  //This is the div that contains all widget content
+  content += "<div class='ui-widget-content ui-corner-all'>";
+  //This is the header div
+  content += "<div class='ui-widget-header ui-corner-all'>";
+
+  //Time to populate the day popup header
+  content += "<h2>";
+  content += dayNum + " " + monthNames[month] + " " + year;
+  content += "</h2>";
+  content += "</div>";
+
+  //Lets begin our unordered list
+  content += "<ul class=\"timeList\">";
+  //This loop will create a list item for every hour of the day between 0800-1700
+  for (var i = 8; i < 18; i++)
+  {
+    content += "<li class=\"timeListItem\">" + i + "00" + "</li>";
+  }
+  content += "</ul>";
+  content += "</div></div>";
+  
+  //The following is from:
+  //https://jqueryui.com/dialog/#default
+  jQuery(".daySelector").html(content);
+  
+  //Using a dialog will pop up the day view in a dialog box.
+  //Setting the min height and width found here:
+  //http://api.jqueryui.com/dialog/#option-minHeight
+  //Setting the UI effects for open/close here:
+  //http://api.jqueryui.com/category/effects/
+  //http://api.jqueryui.com/dialog/#option-hide
+  jQuery(".daySelector").dialog({ minWidth: 500, minHeight: 500, 
+      show: {
+        effect: "slide",
+        duration: 1000
+      },
+      hide: {
+        effect: "slide",
+        duration: 1000
+      }});
+
+}
+
+//This function takes a javascript date object and will populate a calendar based
+//on that date. Should no date be supplied then it will assume todays date is the
+//appropriate date to build off of
+function buildCalendar(date) {
   var content = "";
   var dayNum = 1; //used for enumerating days on the calendar
   //var current = date;
 
   //in the case that no date has been passed in, lets use a default
-  if ( date !== undefined )
+  if (date !== undefined)
   {
     currentCalendarDate = date;
   }
@@ -26,11 +82,11 @@ function buildCalendar( date ){
   //  Found this site especially helpful:
   //  http://stackoverflow.com/questions/13571700/get-first-and-last-date-of-current-month-with-javascript-or-jquery
   //  And this: http://www.w3schools.com/jsref/jsref_obj_date.asp
-  var firstOfMonth = new Date( currentCalendarDate.getFullYear(), currentCalendarDate.getMonth(), 1 );
+  var firstOfMonth = new Date(currentCalendarDate.getFullYear(), currentCalendarDate.getMonth(), 1);
 
   //Need to figure out how many days are in February
   //leap year check
-  if ( ( year % 100 !== 0 ) && ( year % 4 === 0 ) || ( year % 400 === 0 ) ) {
+  if ((year % 100 !== 0) && (year % 4 === 0) || (year % 400 === 0)) {
     totalFeb = 29;
   }
   //Boring normal year
@@ -38,50 +94,21 @@ function buildCalendar( date ){
     totalFeb = 28;
   }
   //Need to know how many days are in the month, initialize this array
-  var totalDays = [ 31, totalFeb, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
-  //Need this so we can label the month on the calendar
-  var monthNames = [ "January", "February", "March", "April",
-    "May", "June", "July", "August", "September", "October",
-    "November", "December" ];
+  var totalDays = [31, totalFeb, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
+  //This is the whole widget div
   content += "<div class='ui-widget ui-calendar'>";
+  //This is the div that contains all widget content
   content += "<div class='ui-widget-content ui-corner-all'>";
+  //This is the header div
   content += "<div class='ui-widget-header ui-corner-all'>";
-  content += "<h2>"+monthNames[currentCalendarDate.getMonth()] + " " + currentCalendarDate.getFullYear()+"</h2></div>";
+  content += "<h2>";
+  content += "<button id=\"prev-button\" onclick=\"loadPreviousMonth()\"></button>";
+  content += "<div id=\"calendarTitle\">" + monthNames[currentCalendarDate.getMonth()] + " " + currentCalendarDate.getFullYear() + "</div>";
+  content += "<button id=\"next-button\" onclick=\"loadNextMonth()\"></button>";
+  content += "</h2></div>";
   //Start the table
   content += "<table class=\"calendarTable\">";
-
-  //Initialize the row of the table with the name of the month and
-  //the next and previous month buttons
-  content += "<tr>";
-  //The following loop builds the top row of the table with the month name
-  //and the next month and previous month buttons
-  for ( var i = 0; i < 7; i++ )
-  {
-    if ( i === 0 ) //This is where we will place the PREVIOUS button for the previous month
-    {
-      content += "<th class=\"calendarTitleBar\" \n\
-                                onmouseover=\"ChangeColor(this, true)\" onmouseout=\"ChangeColor(this, false)\" \n\
-                                onclick=\"loadPreviousMonth()\">PREVIOUS</th>";
-    }
-    else if ( i === 3 ) //This is the column where we will place the month and year
-    {
-      //content += "<th id=\"calendarMonthName\">";
-      //content += monthNames[currentCalendarDate.getMonth()] + " " + currentCalendarDate.getFullYear();
-      //content += "</th>";
-    }
-    else if ( i === 6 ) //This is where we will place the NEXT button for the next month
-    {
-      content += "<th class=\"calendarTitleBar\" \n\
-                                onmouseover=\"ChangeColor(this, true)\" onmouseout=\"ChangeColor(this, false)\" \n\
-                                onclick=\"loadNextMonth()\">NEXT</th>";
-    }
-    else //This is just for placeholders so the month name, and the next and previous buttons are placed correctly
-    {
-      content += "<th class=\"calendarTitleBar\"></th>";
-    }
-  }
-  content += "</tr>";//End the top row of the table
 
   //Build the row of the table that lists the days of the week
   content += "<tr>";
@@ -97,13 +124,13 @@ function buildCalendar( date ){
   //Time to start placing days. Numbered days should match an actual calendar
   //The following loop will loop through each week of the month and place the
   //numbered days in the correct placeholders in the table
-  for ( var weekCounter = 0; weekCounter < 6; weekCounter++ )
+  for (var weekCounter = 0; weekCounter < 6; weekCounter++)
   {
     content += "<tr>";//start the current 'week'
-    for ( var dayCounter = 0; dayCounter < 7; dayCounter++ )
+    for (var dayCounter = 0; dayCounter < 7; dayCounter++)
     {
       //To make sure we get the first day of the month right
-      if ( foundFirst === 0 && dayCounter !== firstOfMonth.getDay() )
+      if (foundFirst === 0 && dayCounter !== firstOfMonth.getDay())
       {
         content += "<td class=\"calendarDay\" onmouseover=\"ChangeColor(this, true)\" onmouseout=\"ChangeColor(this, false)\"></td>";
         continue;
@@ -112,11 +139,20 @@ function buildCalendar( date ){
       //Set the foundFirst boolean to signify we have printed the correct
       //first day of the month
       foundFirst = 1;
-      if ( dayNum <= totalDays[month] )
+      if (dayNum <= totalDays[month])
       {
-        content += "<td class=\"calendarDay\" onmouseover=\"ChangeColor(this, true)\" onmouseout=\"ChangeColor(this, false)\">" + dayNum + "</td>";
+        //Check to see if it is the current day so we can have special styling
+        if (dayNum === currentDate.getDate() && currentCalendarDate.getMonth() === currentDate.getMonth())
+        {
+          console.log(currentDate.getDate());
+          content += "<td class=\"currentDate\" onmouseover=\"ChangeColor(this, true)\" onmouseout=\"ChangeColor(this, false)\" onclick=\"buildDay(" + currentCalendarDate.getFullYear() + ", " + currentCalendarDate.getMonth() + ", " + dayNum + ")\">" + dayNum + "</td>";
+        }
+        else
+        {
+          content += "<td class=\"calendarDay\" onmouseover=\"ChangeColor(this, true)\" onmouseout=\"ChangeColor(this, false)\" onclick=\"buildDay(" + currentCalendarDate.getFullYear() + ", " + currentCalendarDate.getMonth() + ", " + dayNum + ")\">" + dayNum + "</td>";
+        }
       }
-      else if ( ( dayNum > totalDays[month] ) && dayCounter < 7 ) //Makes sure we don't print day numbers that don't exist
+      else if ((dayNum > totalDays[month]) && dayCounter < 7) //Makes sure we don't print day numbers that don't exist
       {
         content += "<td class=\"calendarDay\" onmouseover=\"ChangeColor(this, true)\" onmouseout=\"ChangeColor(this, false)\"></td>";
       }
@@ -129,7 +165,7 @@ function buildCalendar( date ){
     //where we will sometimes have a full row in the table with no numbered
     //days. To avoid this we have a break statement so there is no completely
     //empty rows
-    if ( dayNum > totalDays[month] )
+    if (dayNum > totalDays[month])
     {
       break;
     }
@@ -137,16 +173,23 @@ function buildCalendar( date ){
 
   content += "</table>";//End the table
   content += "</div></div>";
-  //Throw our HTML into the calendar div
-  jQuery( ".calendarDiv" ).html( content );
+  //Throw our HTML into the calendar div, which is a placeholder of the widget
+  jQuery(".calendarDiv").html(content);
 }
 
 //This function is used to highlight the day that the user is trying
 //to select. Found here:
 //http://imar.spaanjaars.com/312/how-do-i-make-a-full-table-row-clickable
-function ChangeColor( tableRow, highLight )
+function ChangeColor(tableRow, highLight)
 {
-  if ( highLight )
+  //Since we might decide to use different CSS stylings later, this will dynamically
+  //store the table background color so that when we highlight the cells they can 
+  //return to the color they were before being highlighted
+  if (tableBackgroundColor === undefined)
+  {
+    tableBackgroundColor = tableRow.style.backgroundColor;
+  }
+  if (highLight)
   {
     //This is the color of the highlighted cell
     tableRow.style.backgroundColor = '#dcfac9';
@@ -154,20 +197,20 @@ function ChangeColor( tableRow, highLight )
   else
   {
     //This is what the color returns to when not hovered over
-    tableRow.style.backgroundColor = 'lightblue';
+    tableRow.style.backgroundColor = tableBackgroundColor;
   }
 }
 
 //This function adds 1 to the month of the current displayed month and reloads the calendar
 function loadNextMonth()
 {
-  var nextMonth = new Date( currentCalendarDate.getFullYear(), currentCalendarDate.getMonth() + 1 );
-  buildCalendar( nextMonth );
+  var nextMonth = new Date(currentCalendarDate.getFullYear(), currentCalendarDate.getMonth() + 1);
+  buildCalendar(nextMonth);
 }
 
 //This function subtracts 1 to the month of the current displayed month and reloads the calendar
 function loadPreviousMonth()
 {
-  var previousMonth = new Date( currentCalendarDate.getFullYear(), currentCalendarDate.getMonth() - 1 );
-  buildCalendar( previousMonth );
+  var previousMonth = new Date(currentCalendarDate.getFullYear(), currentCalendarDate.getMonth() - 1);
+  buildCalendar(previousMonth);
 }
