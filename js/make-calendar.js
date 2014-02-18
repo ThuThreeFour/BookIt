@@ -142,7 +142,7 @@ function buildCalendar(date) {
       if (dayNum <= totalDays[month])
       {
         //Check to see if it is the current day so we can have special styling
-        if (dayNum === currentDate.getDate() && currentCalendarDate.getMonth() === currentDate.getMonth())
+        if (dayNum === currentDate.getDate() && currentCalendarDate.getMonth() === currentDate.getMonth() && currentCalendarDate.getFullYear() === currentDate.getFullYear())
         {
           console.log(currentDate.getDate());
           content += "<td class=\"currentDate\" onmouseover=\"ChangeColor(this, true)\" onmouseout=\"ChangeColor(this, false)\" onclick=\"buildDay(" + currentCalendarDate.getFullYear() + ", " + currentCalendarDate.getMonth() + ", " + dayNum + ")\">" + dayNum + "</td>";
