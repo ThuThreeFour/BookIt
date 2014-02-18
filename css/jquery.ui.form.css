@@ -20,12 +20,13 @@
 .ui-form .ui-widget-content{
   padding: 5px;
 }
-.ui-form label{
-  float: left;
+
+.ui-form .ui-state-error, .ui-form .ui-state-error p, .ui-form .ui-state-error .ui-icon{
+  float: right;
 }
 
-.ui-form input, .ui-form .ui-state-error, .ui-form .ui-icon, .ui-form .ui-state-error p{
-  float: right;
+.ui-form label, .ui-form label div input{
+  float: left;
 }
 
 .ui-form label, .ui-state-error p{
