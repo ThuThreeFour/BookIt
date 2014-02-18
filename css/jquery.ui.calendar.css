@@ -1,48 +1,212 @@
 /* 
     Created on : Feb 13, 2014, 7:19:51 PM
-    Author     : Libby and Wellman
+    Author     : Nappi
     Source     : jQuery UI 1.10: The User Interface Library for jQuery p.44
 */
 
-.ui-form{
-  width:470px;
-  margin: 0 auto;
+/*
+  In order to have the calendar be the size of the browser window we need this
+  http://stackoverflow.com/questions/1575141/make-div-100-height-of-browser-window
+*/
+body, html
+{
+  height: 100%;
 }
 
-.ui-form .ui-widget-header h2{
+/*This is the CSS for the base calender element under the calendarDiv*/
+.ui-calendar{
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  height: 100%;
+}
+
+/*
+  Centers the calendar table on the page and sets the text to be centered.
+  Also sets the height of the calendar table under the heading so there is
+  no overflowing
+*/
+.calendarTable
+{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  height: 80%; /*Make this 80% so it doesn't jump out of its containing div'*/
+}
+
+/*
+  Styles the calendar month and year to have a 5px border to the left and right.
+  The display: inline-block allows the next and previous month buttons to be on
+  the same line as the month and year. The width: 20% sets the size of the title's
+  container
+*/
+#calendarTitle
+{
+  width: 20%;
+  border-left: 5px;
+  border-right: 5px;
+  display: inline-block;
+}
+
+/*
+  Styles the table rows to be 150 x 150 px boxes
+*/
+.calendarDay
+{
+  max-width: 150px;
+  min-width: 150px;
+  min-height: 150px;
+  max-height: 150px;
+  border: 2px solid black;
+}
+
+/*
+  Styling for the current date on the calendar
+*/
+.currentDate
+{
+  max-width: 150px;
+  min-width: 150px;
+  min-height: 150px;
+  max-height: 150px;
+  background-color: lightgreen;
+  border: 2px dotted green;
+}
+
+/*
+  Styles the calendar heading i.e. SUNDAY=>SATURDAY
+*/
+.calendarHeading
+{
+  max-width: 150px;
+  min-width: 150px;
+  min-height: 150px;
+  max-height: 150px;
+}
+
+/*
+  Styles the buttons on the page
+*/
+.ui-calendar button
+{
+  width: 25px;
+  height: 25px;
+}
+
+/*
+  This is the code that styles the previous month button
+*/
+.ui-calendar #prev-button
+{
+  background-image: url(../images/prev_arrow.jpeg);
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+/*
+  This is the code that styles the next month button
+*/
+.ui-calendar #next-button
+{
+  background-image: url(../images/next_arrow.jpeg);
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+/*
+  Sets calendarDiv to have height 100% and be centered in its
+  respective parent.
+*/
+.calendarDiv
+{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+}
+
+
+
+.daySelector
+{
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+
+/*
+  Styles the unordered list from which users will select a time they would like
+  to sign up for.
+  http://stackoverflow.com/questions/1027354/need-a-unordered-list-without-any-bullets
+*/
+.timeList
+{
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  list-style-type: none;
+}
+
+.timeListItem
+{
+  border: 1px solid black;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.ui-calendar-day .ui-widget-header
+{
   margin: 10px 0 10px 20px;
+  text-align: center;
 }
 
-.ui-form .ui-widget-header h3{
+/*
+  Setting ui-widget-content height to 100% so the descendants can fill the window
+*/
+.ui-widget-content
+{
+  height: 100%;
+}
+
+.ui-calendar .ui-widget-header{
+  margin: 10px 0 10px 20px;
+  text-align: center;
+}
+
+.ui-calendar .ui-widget-header h3{
   margin: 10px 45%;
 }
 
-.ui-form .ui-widget-content{
+.ui-calendar .ui-widget-content{
   padding: 5px;
 }
-.ui-form label{
+.ui-calendar label{
   float: left;
 }
 
-.ui-form input, .ui-form .ui-state-error, .ui-form .ui-icon, .ui-form .ui-state-error p{
+.ui-calendar input, .ui-calendar .ui-state-error, .ui-calendar .ui-icon, .ui-calendar .ui-state-error p{
   float: right;
 }
 
-.ui-form label, .ui-state-error p{
+.ui-calendar label, .ui-state-error p{
   font-size: 12px;
   padding : 10px 10px 0 0;
 }
 
-.ui-form .ui-state-error{
+.ui-calendar .ui-state-error{
   padding: 4px;
 }
 
-.ui-form .ui-state-error p{
+.ui-calendar .ui-state-error p{
   font-weight: bold;
   padding-top: 5px;
 }
 
-.ui-form .ui-state-error .ui-icon{
+.ui-calendar .ui-state-error .ui-icon{
   margin:5px 3px 0 4px;
 }
 
