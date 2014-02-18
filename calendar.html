@@ -20,8 +20,9 @@ Last Modified: 02-10-14 JMN
     <!--
       <link rel="stylesheet" href="css/calendar.css">
     -->
-    <link rel="stylesheet" href="development-bundle/themes/pepper-grinder/jquery.ui.all.css">
-    <link rel="stylesheet" href="css/pepper-grinder/jquery-ui-1.10.4.custom.css">
+    <link rel="stylesheet" href="development-bundle/themes/cupertino/jquery.ui.all.css">
+    <link rel="stylesheet" href="css/cupertino/jquery-ui-1.10.4.custom.css">
+    <link rel="stylesheet" href="css/jquery.ui.calendar.css">
     <!--
     Load jQuery library from the Google content Delivery Network (CDN)
     see http://encosia.com/3-reasons-why-you-should-let-google-host-jquery-for-you/
@@ -30,14 +31,17 @@ Last Modified: 02-10-14 JMN
     -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="js/make-calendar.js"></script>
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script type="text/javascript">
-      jQuery( document ).ready( function(){
+      jQuery(document).ready(function() {
         buildCalendar();
-      } );
+      });
     </script>
 
   </head>
   <body>
     <div class="calendarDiv"></div>
+    <div class="daySelector"></div>
   </body>
 </html>
