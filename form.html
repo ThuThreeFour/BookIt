@@ -15,19 +15,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="development-bundle/themes/cupertino/jquery.ui.all.css">
+    <link rel="stylesheet" href="css/cupertino/jquery-ui-1.10.4.custom.min.css">
+    <link rel="stylesheet" href="css/jquery.ui.form.css">
     <!-- 
     jQuery Idle Timer source code from 
     https://github.com/mikesherov/jquery-idletimer
     -->
-    <link rel="stylesheet" href="development-bundle/themes/pepper-grinder/jquery.ui.all.css">
-    <link rel="stylesheet" href="css/pepper-grinder/jquery-ui-1.10.4.custom.css">
-    <link rel="stylesheet" href="css/jquery.ui.form.css">
-    <script src="js/jquery-idletimer.js"></script>
-    <script src="js/idle-timer.js"></script>
+    <script src="js/jquery-idle-timer/jquery-idletimer.js"></script>
+    <script src="js/jquery-idle-timer/idle-timer.js"></script>
+    <script src="js/jquery-validate/jquery.validate.min.js"></script>
+    <script src="js/validateForm.js"></script>
     <script type="text/javascript">
       jQuery( document ).ready( function(){
-        checkIdle();
-      } );
+        //checkIdle();
+        $( "#cancel" ).click( function(){
+          window.location = "home.html";
+        } );
+        validate();
+        //$("button").button();
+      } ); // end ready
     </script>
   </head>
   <body>
@@ -37,33 +44,33 @@
           <h2>Appointment Form</h2>
         </div>
         <form action="#" class="ui-helper-clearfix">
-          <label>First Name</label>
-          <div class="ui-state-error ui-corner-all">
-            <input type="text">
-            <div class="ui-icon ui-icon-alert"></div>
-            <p class="ui-helper-reset ui-state-error-text">Required field</p>
+          <div class="inputField">
+            <label for="fname" class="formLabel">First Name</label>
+            <div class="ui-corner-all">
+              <input type="text" id="fname" name="fname">
+            </div>
           </div>
-          <br><br>
-          <label>First Name</label>
-          <div class="ui-state-error ui-corner-all">
-            <input type="text">
-            <div class="ui-icon ui-icon-alert"></div>
-            <p class="ui-helper-reset ui-state-error-text">Required field</p>
+          <div class="inputField">
+            <label for="lname" class="formLabel">Last Name</label>
+            <div class="ui-corner-all">
+              <input type="text" id="lname" name="lname">
+            </div>
           </div>
-          <br><br>
-          <label>Phone</label>
-          <div class="ui-state-error ui-corner-all">
-            <input type="text">
-            <div class="ui-icon ui-icon-alert"></div>
-            <p class="ui-helper-reset ui-state-error-text">Required field</p>
+          <div class="inputField">
+            <label for="phoneNum" class="formLabel">Phone</label>
+            <div class="ui-corner-all">
+              <input type="text" id="phoneNum" name="phoneNum">
+            </div>
           </div>
-          <br><br>
-          <label>Email</label>
-          <div class="ui-state-error ui-corner-all">
-            <input type="text">
-            <div class="ui-icon ui-icon-alert"></div>
-            <p class="ui-helper-reset ui-state-error-text">Required field</p>
+          <div class="inputField">
+            <label for="email" class="formLabel">Email</label>
+            <div class="ui-corner-all">
+              <input type="text" id="email" name="email">
+            </div>
           </div>
+          <button id="cancel" name="cancel">Cancel</button>
+          <button id="clear" name="clear">Clear</button>
+          <button id="submit" name="submit">Submit</button>
         </form>
       </div>
       <div class="ui-widget-content ui-corner-all">
