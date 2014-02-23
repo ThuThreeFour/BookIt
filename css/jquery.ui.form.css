@@ -70,6 +70,10 @@
   margin:5px 3px 0 4px;
 }
 
+.ui-form .inputField input{
+    width: 200px;
+}
+
 .ui-form button{
   float: right;
 }
