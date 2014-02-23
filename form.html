@@ -28,9 +28,12 @@
     <script src="js/validateForm.js"></script>
     <script type="text/javascript">
       jQuery( document ).ready( function(){
-        checkIdle();
+        //checkIdle();
+        $( "#cancel" ).click( function(){
+          window.location = "home.html";
+        } );
         validate();
-        $("button").button();
+        //$("button").button();
       } ); // end ready
     </script>
   </head>
@@ -65,7 +68,9 @@
               <input type="text" id="email" name="email">
             </div>
           </div>
-          <button>Submit</button>
+          <button id="cancel" name="cancel">Cancel</button>
+          <button id="clear" name="clear">Clear</button>
+          <button id="submit" name="submit">Submit</button>
         </form>
       </div>
       <div class="ui-widget-content ui-corner-all">
