@@ -2,10 +2,11 @@
     Created on : Feb 13, 2014, 7:19:51 PM
     Author     : Libby and Wellman
     Source     : jQuery UI 1.10: The User Interface Library for jQuery p.44
+    Modified as needed by Chris Compton
 */
 
 .ui-form{
-  width:470px;
+  width:350px;
   margin: 0 auto;
 }
 
@@ -20,30 +21,57 @@
 .ui-form .ui-widget-content{
   padding: 5px;
 }
-.ui-form label{
+
+.ui-form .ui-state-error{
+  width: 206px;
+}
+
+.ui-form .inputField{
+  margin: 30px 0;
+  padding: 20px 0;
+}
+
+.ui-form .inputField:nth-of-type(1){
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.ui-form .inputField:nth-last-of-type(1){
+  margin-bottom: 60px;
+  padding-bottom: 20px;
+}
+
+.ui-form .ui-state-error p, .ui-form .ui-state-error .ui-icon{
   float: left;
 }
 
-.ui-form input, .ui-form .ui-state-error, .ui-form .ui-icon, .ui-form .ui-state-error p{
-  float: right;
+.ui-form .formLabel{
+  font-size: 15px;
+  width: 85px;
+  padding-top: 5px
 }
 
-.ui-form label, .ui-state-error p{
+.ui-form .ui-state-error, .ui-form input, 
+.ui-form .formLabel{
+  float: left;
+}
+
+.ui-form .ui-state-error p{
+  width: 178px;
   font-size: 12px;
-  padding : 10px 10px 0 0;
+  padding : 5px 5px 0 0;
 }
 
 .ui-form .ui-state-error{
   padding: 4px;
 }
 
-.ui-form .ui-state-error p{
-  font-weight: bold;
-  padding-top: 5px;
-}
-
 .ui-form .ui-state-error .ui-icon{
   margin:5px 3px 0 4px;
+}
+
+.ui-form button{
+  float: right;
 }
 
 .ui-helper-clearfix:before, .ui-helper-clearfix:after{
