@@ -22,44 +22,15 @@
     jQuery Idle Timer source code from 
     https://github.com/mikesherov/jquery-idletimer
     -->
-    <script src="js/jquery-idletimer.js"></script>
-    <script src="js/idle-timer.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/jquery-idle-timer/jquery-idletimer.js"></script>
+    <script src="js/jquery-idle-timer/idle-timer.js"></script>
+    <script src="js/jquery-validate/jquery.validate.min.js"></script>
+    <script src="js/validateForm.js"></script>
     <script type="text/javascript">
       jQuery( document ).ready( function(){
-        checkIdle();
-        
-        $('form').validate({
-          rules:{
-            fname: {
-              required: true
-            },
-            lname: {
-              required: true
-            },
-            phone: {
-              required: true
-            },
-            email: {
-              required: true
-            }
-          }, // end rules
-          messages:{
-            fname: {
-              required: "BLAH BLAH"
-            },
-            lname: {
-              required: "BLAH BLAH"
-            },
-            phone: {
-              required: "BLAH BLAH"
-            },
-            email: {
-              required: "BLAH BLAH"
-            }
-          } // end messages
-        }); // end validate
-        
+        //checkIdle();
+        validate();
+        $("button").button();
       } ); // end ready
     </script>
   </head>
@@ -70,33 +41,31 @@
           <h2>Appointment Form</h2>
         </div>
         <form action="#" class="ui-helper-clearfix">
-          <label>First Name</label>
-          <div class="ui-state-error ui-corner-all">
-            <input type="text" id="fname" name="fname">
-            <p class="ui-helper-reset ui-state-error-text">Required field</p>
-            <div class="ui-icon ui-icon-alert"></div>
+          <div class="inputField">
+            <label for="fname" class="formLabel">First Name</label>
+            <div class="ui-corner-all">
+              <input type="text" id="fname" name="fname">
+            </div>
           </div>
-          <br><br>
-          <label>First Name</label>
-          <div class="ui-state-error ui-corner-all">
-            <input type="text" id="lname" name="lname">
-            <p class="ui-helper-reset ui-state-error-text">Required field</p>
-            <div class="ui-icon ui-icon-alert"></div>
+          <div class="inputField">
+            <label for="lname" class="formLabel">Last Name</label>
+            <div class="ui-corner-all">
+              <input type="text" id="lname" name="lname">
+            </div>
           </div>
-          <br><br>
-          <label>Phone</label>
-          <div class="ui-state-error ui-corner-all">
-            <input type="text" id="phone" name="phone">
-            <p class="ui-helper-reset ui-state-error-text">Required field</p>
-            <div class="ui-icon ui-icon-alert"></div>
+          <div class="inputField">
+            <label for="phoneNum" class="formLabel">Phone</label>
+            <div class="ui-corner-all">
+              <input type="text" id="phoneNum" name="phoneNum">
+            </div>
           </div>
-          <br><br>
-          <label>Email</label>
-          <div class="ui-state-error ui-corner-all">
-            <input type="text" id="email" name="email">
-            <p class="ui-helper-reset ui-state-error-text">Required field</p>
-            <div class="ui-icon ui-icon-alert"></div>
+          <div class="inputField">
+            <label for="email" class="formLabel">Email</label>
+            <div class="ui-corner-all">
+              <input type="text" id="email" name="email">
+            </div>
           </div>
+          <button>Submit</button>
         </form>
       </div>
       <div class="ui-widget-content ui-corner-all">
