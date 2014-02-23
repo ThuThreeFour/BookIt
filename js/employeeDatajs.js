@@ -11,6 +11,7 @@
  */
 
 var employeeData;
+var employeeId;
 
 // The ajax call allows for synchronous loading, which is needed
 // here so that the JSON file can be completely loaded before
@@ -25,17 +26,28 @@ jQuery.ajax({
   }
 });
 
+function loadEmployeeCal(employeeId) {
+  var id = employeeId;
+  window.location = "calendar.html"; // take user to employee calendar
+}
 
 function placeEmployeeData() {
+
+
   var strContent = " ";
   // create dynamic content of employees' data from employeeData.json
   // loop through all employees
   for (var empl = 0; empl < employeeData.employees.length; empl++) {
     strContent += "<div class='emplyProfile ui-widget-content ui-corner-all'>";
-    // only exception to using single quote for string for ease of use 
-    strContent += '<img src="' + employeeData.employees[empl].img + '"' + 'class="' + 'pic' + '">';
+    //strContent += '<img src="' + employeeData.employees[empl].img + '"' + 'class="' + 'pic' + '" >';
+    employeeId = employeeData.employees[empl].firstName;
+    //strContent += '<img src=' + employeeData.employees[empl].img + " " + 'class=' + 'pic' + " " + 'id="' + employeeId + '" ' + "onclick=loadEmployeeCal(" + '"' + employeeId + '"' + ')' + '>';
+    // sets corresponding id to employee image  
+    strContent += "<img src='" + employeeData.employees[empl].img + "' class='pic' id='" + employeeId + "' ";
+    strContent += "onclick='loadEmployeeCal(\"" + employeeId + "\")'>";
+    //document.getElementById()
     strContent += "<div class='ui-widget-header ui-corner-all'>";
-    strContent += "<h1>" + employeeData.employees[empl].firstName + "</h1>";
+    strContent += "<h1>" + employeeId + "</h1>";
     strContent += "<h2>" + employeeData.employees[empl].jobTitle + "</h2>";
     strContent += "</div>";
     strContent += "<ul id=" + "expertiseList" + ">";
@@ -53,7 +65,7 @@ function placeEmployeeData() {
 
 // Once the document is ready, we can place the content.
 jQuery(document).ready(function() {
-  
+
   // Setting properties to Log In button 
   $("#loginButton").button({
     label: "Log In", // give label to login button 
@@ -61,21 +73,21 @@ jQuery(document).ready(function() {
       primary: "ui-icon-person" // person icon 
     }
   });
-  
+
   // Setting properties to employee Log In button
   $("#nav1").button({
     icons: {
       primary: "ui-icon-person"
     }
   });
-  
+
   // Setting property to Home button
   $("#nav2").button({
     icons: {
       primary: "ui-icon-home"
     }
   });
-  
+
   // Dynamic placement of employee content 
   placeEmployeeData();
 });
