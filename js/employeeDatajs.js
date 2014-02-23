@@ -31,15 +31,15 @@ function placeEmployeeData() {
   // create dynamic content of employees' data from employeeData.json
   // loop through all employees
   for (var empl = 0; empl < employeeData.employees.length; empl++) {
-    strContent += "<div class=" + "emplyProfile" + ">";
+    strContent += "<div class='emplyProfile ui-widget-content ui-corner-all'>";
     // only exception to using single quote for string for ease of use 
     strContent += '<img src="' + employeeData.employees[empl].img + '"' + 'class="' + 'pic' + '">';
-    strContent += "<div class=" + "emptyLine" + "></div>";
+    strContent += "<div class='ui-widget-header ui-corner-all'>";
     strContent += "<h1>" + employeeData.employees[empl].firstName + "</h1>";
     strContent += "<h2>" + employeeData.employees[empl].jobTitle + "</h2>";
-    strContent += "<div class=" + "emptyLine" + "></div>";
+    strContent += "</div>";
     strContent += "<ul id=" + "expertiseList" + ">";
-    strContent += "<lh class=" + "expertiseBullet" + ">" + "Expertises" + "</lh>";
+    strContent += "<lh class=" + "expertiseBullet" + ">" + "Expertise" + "</lh>";
     // loop through employee's expertise list
     for (var exprt = 0; exprt < employeeData.employees[empl].expertiseList.expertise.length; exprt++) {
       strContent += "<li>" + employeeData.employees[empl].expertiseList.expertise[exprt] + "</li>";
