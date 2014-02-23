@@ -24,7 +24,8 @@ function buildDay(year, month, dayNum) {
 
   //Time to populate the day popup header
   content += "<h2>";
-  content += dayNum + " " + monthNames[month] + " " + year;
+  content += monthNames[month] + " " + dayNum + ", " + year;
+  //content += dayNum + " " + monthNames[month] + " " + year;
   content += "</h2>";
   content += "</div>";
 
