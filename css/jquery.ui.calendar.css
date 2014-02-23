@@ -29,6 +29,10 @@ body, html
 .calendarTable
 {
   text-align: center;
+  /*This color is the clickable default background color from:alignment-adjust: 
+    http://jqueryui.com/themeroller for the cupertino theme
+  */
+  background-color: #d7ebf9;
   margin-left: auto;
   margin-right: auto;
   height: 80%; /*Make this 80% so it doesn't jump out of its containing div'*/
@@ -60,6 +64,17 @@ body, html
   border: 2px solid black;
 }
 
+/*The styling for any day on the calendar which users will not be able to click*/
+.calendarDayInactive
+{
+  max-width: 150px;
+  min-width: 150px;
+  min-height: 150px;
+  max-height: 150px;
+  background-color: #f2f5f7;
+  border: 2px solid black;
+}
+
 /*
   Styling for the current date on the calendar
 */
@@ -69,8 +84,8 @@ body, html
   min-width: 150px;
   min-height: 150px;
   max-height: 150px;
-  background-color: lightgreen;
-  border: 2px dotted green;
+  background-color: #ffef8f;
+  border: 3px dotted #f9dd34;
 }
 
 /*
@@ -127,9 +142,9 @@ body, html
   margin-left: auto;
   margin-right: auto;
   height: 100%;
+  overflow: auto;
+  
 }
-
-
 
 .daySelector
 {
@@ -160,7 +175,7 @@ body, html
 
 .ui-calendar-day .ui-widget-header
 {
-  margin: 10px 0 10px 20px;
+  margin: 10px 10px 10px 10px;
   text-align: center;
 }
 
@@ -173,7 +188,7 @@ body, html
 }
 
 .ui-calendar .ui-widget-header{
-  margin: 10px 0 10px 20px;
+  margin: 10px 10px 10px 10px;
   text-align: center;
 }
 

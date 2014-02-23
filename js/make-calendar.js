@@ -14,6 +14,7 @@ var monthNames = ["January", "February", "March", "April",
 //This function will populate a jQuery dialog box with all times for the selected day
 function buildDay(year, month, dayNum) {
   var content = "";
+  var monthName = monthNames[month];
 
   content += "<div class='ui-widget ui-calendar-day'>";
   //This is the div that contains all widget content
@@ -28,35 +29,68 @@ function buildDay(year, month, dayNum) {
   content += "</div>";
 
   //Lets begin our unordered list
-  content += "<ul class=\"timeList\">";
+  //To make the onclick act as a submit:
+  //https://forums.digitalpoint.com/threads/html-checkbox-onclick-submit.1271195/
+  content += "<ul class=\"timeList\">"; //onclick=\"this.form.submit();\">";
   //This loop will create a list item for every hour of the day between 0800-1700
   for (var i = 8; i < 18; i++)
   {
-    content += "<li class=\"timeListItem\">" + i + "00" + "</li>";
+    content += "<li class=\"timeListItem\" onmouseover=\"ChangeColor(this, true)\"";
+    content += "onmouseout=\"ChangeColor(this, false)\"";
+    content += "onclick=\"loadInfoForm(" + year + ", " + month + ", " + dayNum + ", " + i + "00)\">";
+
+    //Lets make the time in civilian format
+    //To avoid 0 showing up as a time, we check to see if i == 12
+    if (i === 12)
+    {
+      content += 12;
+    }
+    else
+    {
+      content += i % 12;
+    }
+    if (i >= 12)
+    {
+      content += " pm"; //Because civilians can't subtract 12 from military time
+    }
+    else
+    {
+      content += " am"; //Because civilians can't subtract 12 from military time
+    }
+
+    //end the list item
+    content += "</li>";
+
   }
   content += "</ul>";
   content += "</div></div>";
-  
+
   //The following is from:
   //https://jqueryui.com/dialog/#default
   jQuery(".daySelector").html(content);
-  
+
   //Using a dialog will pop up the day view in a dialog box.
   //Setting the min height and width found here:
   //http://api.jqueryui.com/dialog/#option-minHeight
   //Setting the UI effects for open/close here:
   //http://api.jqueryui.com/category/effects/
   //http://api.jqueryui.com/dialog/#option-hide
-  jQuery(".daySelector").dialog({ minWidth: 500, minHeight: 500, 
-      show: {
-        effect: "slide",
-        duration: 1000
-      },
-      hide: {
-        effect: "slide",
-        duration: 1000
-      }});
+  jQuery(".daySelector").dialog({minWidth: 500, minHeight: 500,
+    show: {
+      effect: "slide",
+      duration: 500
+    },
+    hide: {
+      effect: "slide",
+      duration: 500
+    }});
 
+}
+
+//idea courtesy of http://stackoverflow.com/questions/3682805/javascript-load-a-page-on-button-click
+//This function will call the form.html page and pass the desired appointment information
+function loadInfoForm(year, month, dayNum, time) {
+  window.location.href = "form.html?year=" + year + "?month=" + month + "?dayNum=" + dayNum + "?time=" + time;
 }
 
 //This function takes a javascript date object and will populate a calendar based
@@ -132,7 +166,8 @@ function buildCalendar(date) {
       //To make sure we get the first day of the month right
       if (foundFirst === 0 && dayCounter !== firstOfMonth.getDay())
       {
-        content += "<td class=\"calendarDay\" onmouseover=\"ChangeColor(this, true)\" onmouseout=\"ChangeColor(this, false)\"></td>";
+        //These will be the unnumbered days at the start of the month
+        content += "<td class=\"calendarDay\"></td>";
         continue;
       }
 
@@ -141,11 +176,21 @@ function buildCalendar(date) {
       foundFirst = 1;
       if (dayNum <= totalDays[month])
       {
-        //Check to see if it is the current day so we can have special styling
+        //Check to see if it is today's date so we can have special styling
         if (dayNum === currentDate.getDate() && currentCalendarDate.getMonth() === currentDate.getMonth() && currentCalendarDate.getFullYear() === currentDate.getFullYear())
         {
           console.log(currentDate.getDate());
           content += "<td class=\"currentDate\" onmouseover=\"ChangeColor(this, true)\" onmouseout=\"ChangeColor(this, false)\" onclick=\"buildDay(" + currentCalendarDate.getFullYear() + ", " + currentCalendarDate.getMonth() + ", " + dayNum + ")\">" + dayNum + "</td>";
+        }
+        //Checks for days of this month that have already past so we can style them as inactive
+        else if (dayNum < currentDate.getDate() && currentCalendarDate.getMonth() === currentDate.getMonth() && currentCalendarDate.getFullYear() === currentDate.getFullYear())
+        {
+          content += "<td class=\"calendarDay\">" + dayNum + "</td>";
+        }
+        //Makes every day that we have passed in previous months/years unclickable
+        else if (currentCalendarDate.getMonth() < currentDate.getMonth() || currentCalendarDate.getFullYear() < currentDate.getFullYear())
+        {
+          content += "<td class=\"calendarDay\">" + dayNum + "</td>";
         }
         else
         {
@@ -154,7 +199,8 @@ function buildCalendar(date) {
       }
       else if ((dayNum > totalDays[month]) && dayCounter < 7) //Makes sure we don't print day numbers that don't exist
       {
-        content += "<td class=\"calendarDay\" onmouseover=\"ChangeColor(this, true)\" onmouseout=\"ChangeColor(this, false)\"></td>";
+        //This is one of the unnumbered, unclickable cells after the last numbered day of the month
+        content += "<td class=\"calendarDay\"></td>";
       }
       //Increment the day number for the next day of the week
       dayNum++;
@@ -192,7 +238,7 @@ function ChangeColor(tableRow, highLight)
   if (highLight)
   {
     //This is the color of the highlighted cell
-    tableRow.style.backgroundColor = '#dcfac9';
+    tableRow.style.backgroundColor = '#e4f1fb';
   }
   else
   {
