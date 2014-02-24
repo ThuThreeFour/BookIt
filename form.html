@@ -29,11 +29,13 @@
     <script type="text/javascript">
       jQuery( document ).ready( function(){
         checkIdle();
-        $( "#cancel" ).click( function(){
+        validate();
+        // Found how to do this here:
+        // http://stackoverflow.com/questions/16219247/how-to-suppress-jquery-validation-submithandler-when-cancel-button-is-clicked
+        $( "#cancel" ).click( function(e){
+          e.preventDefault();
           window.location = "home.html";
         } );
-        validate();
-        //$("button").button();
       } ); // end ready
     </script>
   </head>
@@ -68,9 +70,10 @@
               <input type="text" id="email" name="email">
             </div>
           </div>
-          <button id="cancel" name="cancel">Cancel</button>
-          <button id="clear" name="clear">Clear</button>
-          <button id="submit" name="submit">Submit</button>
+          <!-- Cancel button gets class cancel so the validator will ignore it -->
+          <button class="cancel" id="cancel" name="cancel">Cancel</button>
+          <!-- Redirect to home page for now. -->
+          <button type="submit" formaction="home.html" id="submit" name="submit">Submit</button>
         </form>
       </div>
       <div class="ui-widget-content ui-corner-all">
