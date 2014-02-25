@@ -91,7 +91,7 @@ function buildDay(year, month, dayNum) {
 //idea courtesy of http://stackoverflow.com/questions/3682805/javascript-load-a-page-on-button-click
 //This function will call the form.html page and pass the desired appointment information
 function loadInfoForm(year, month, dayNum, time) {
-  window.location.href = "form.html?year=" + year + "?month=" + month + "?dayNum=" + dayNum + "?time=" + time;
+  window.location.href = "form.html?year=" + year + "&month=" + month + "&dayNum=" + dayNum + "&time=" + time;
 }
 
 //This function takes a javascript date object and will populate a calendar based
