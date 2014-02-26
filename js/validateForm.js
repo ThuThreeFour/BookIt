@@ -9,7 +9,7 @@
  * Created on 02-22-2014 CJC
  */
 
-function validate(){
+function validateForm(){
   // Changes to the validator options are based on the documentation
   // found here: http://jqueryvalidation.org/validate#toptions
   $( 'form' ).validate( {
