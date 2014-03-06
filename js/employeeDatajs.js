@@ -26,11 +26,6 @@ jQuery.ajax({
   }
 });
 
-function loadEmployeeCal(employeeId) {
-  var id = employeeId;
-  window.location = "calendar.html"; // take user to employee calendar
-}
-
 function placeEmployeeData() {
 
 
@@ -46,11 +41,11 @@ function placeEmployeeData() {
     strContent += "<img src='" + employeeData.employees[empl].img + "' class='pic' id='" + employeeId + "' ";
     strContent += "onclick='loadEmployeeCal(\"" + employeeId + "\")'>";
     //document.getElementById()
-    strContent += "<div class='ui-widget-header ui-corner-all'>";
+    strContent += "<div class='ui-widget-header ui-corner-all empl-name-title'>";
     strContent += "<h1>" + employeeId + "</h1>";
     strContent += "<h2>" + employeeData.employees[empl].jobTitle + "</h2>";
     strContent += "</div>";
-    strContent += "<ul id=" + "expertiseList" + ">";
+    strContent += "<ul class=" + "expertiseList" + ">";
     strContent += "<lh class=" + "expertiseBullet" + ">" + "Expertise" + "</lh>";
     // loop through employee's expertise list
     for (var exprt = 0; exprt < employeeData.employees[empl].expertiseList.expertise.length; exprt++) {
@@ -74,6 +69,12 @@ jQuery(document).ready(function() {
     }
   });
 
+  $("#registerButton").button({
+    label: "Register",
+    icons: {
+     primary: "ui-icon-pencil" 
+    }
+  });
   // Setting properties to employee Log In button
   $("#nav1").button({
     icons: {

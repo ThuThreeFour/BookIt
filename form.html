@@ -15,7 +15,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!--
     <link rel="stylesheet" href="development-bundle/themes/cupertino/jquery.ui.all.css">
+    -->
     <link rel="stylesheet" href="css/cupertino/jquery-ui-1.10.4.custom.min.css">
     <link rel="stylesheet" href="css/jquery.ui.form.css">
     <!-- 
@@ -29,7 +31,7 @@
     <script type="text/javascript">
       jQuery( document ).ready( function(){
         checkIdle();
-        validate();
+        validateForm();
         // Found how to do this here:
         // http://stackoverflow.com/questions/16219247/how-to-suppress-jquery-validation-submithandler-when-cancel-button-is-clicked
         $( "#cancel" ).click( function(e){

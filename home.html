@@ -15,13 +15,6 @@
 
     <title>Book-It Home</title>
 
-    <!-- The lines below is to link the css to this page. -->
-    <link rel="stylesheet" href="development-bundle/themes/cupertino/jquery.ui.all.css">
-    <link rel="stylesheet" href="css/cupertino/jquery-ui-1.10.4.custom.min.css">
-    <link rel="stylesheet" type="text/css" href="css/homeCSS.css">
-
-
-
     <!-- Load jQuery library from the Google content Delivery Network (CDN)see 
     http://encosia.com/3-reasons-why-you-should-let-google-host-jquery-for-you/
     jQuery can also be downloaded and stored locally from http://jquery.com/download/-->
@@ -30,24 +23,46 @@
     <!-- Links the javascript needed for this page. -->
     <script src="js/jquery-ui/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
     <script src="js/employeeDatajs.js" type="text/javascript"></script>
+    <script src="js/animations.js" type="text/javascript"></script>
 
-
+    <!-- The lines below is to link the css to this page. -->
+    <!--
+    <link rel="stylesheet" href="development-bundle/themes/cupertino/jquery.ui.all.css">
+    -->
+    <link rel="stylesheet" type="text/css" href="css/cupertino/jquery-ui-1.10.4.custom.min.css">
+    <link rel="stylesheet" type="text/css" href="css/homeCSS.css">
 
   </head>
   <body>
-    <div id="top">
-      <img src="images/BookItBanner.png" alt="">
-      <div id="msgTousr">
-        <p id="msg"> Below are our professional staff. Click on the picture of your 
-          preferred specialist to book an appointment with them. </p>
+    <div id="header">
+      <div id="image">
+        <img src="images/BookItBanner.png" alt="">
       </div>
-      <!-- Customer log in button - will not implement this until Beta version.  -->
-      <a href="home.html" id="loginButton"></a> 
+      
+      <div id="loginRegister">
+        <form>
+          <input type="text" placeholder="Username">
+          <input type="text" placeholder="Password">
+          <!-- Customer log in button - will not implement this until Beta version.  -->
+          <a class="userButton" href="home.html" id="loginButton"></a>
+          <a class="userButton" href="home.html" id="registerButton"></a>
+        </form>
+      </div>
+      
+      <div id="msgTousr">
+        <div class="ui-state-highlight ui-corner-all" >
+          <div  class="ui-icon ui-icon-info"></div>
+          <p id="msg">Below are our professional staff. Click on the picture of your 
+            preferred specialist to book an appointment with them. </p>
+        </div>
+      </div>
     </div>
+
     <div class="ui-widget ui-employees" id="employeeContent">
       <!-- Dynamic content of employee data will be here -->
     </div>
     <!-- footer -->
+
     <div id="footer">
       <ul class="nav">
         <li id="nav1">
