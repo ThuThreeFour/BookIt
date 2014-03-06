@@ -41,7 +41,7 @@ function placeEmployeeData() {
     strContent += "<img src='" + employeeData.employees[empl].img + "' class='pic' id='" + employeeId + "' ";
     strContent += "onclick='loadEmployeeCal(\"" + employeeId + "\")'>";
     //document.getElementById()
-    strContent += "<div class='ui-widget-header ui-corner-all'>";
+    strContent += "<div class='ui-widget-header ui-corner-all empl-name-title'>";
     strContent += "<h1>" + employeeId + "</h1>";
     strContent += "<h2>" + employeeData.employees[empl].jobTitle + "</h2>";
     strContent += "</div>";
