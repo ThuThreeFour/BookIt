@@ -27,16 +27,64 @@
     <script src="js/jquery-validate/jquery.validate.min.js"></script>
     <script src="js/validateForm.js"></script>
     <script type="text/javascript">
-      jQuery( document ).ready( function(){
+      jQuery(document).ready(function() {
         checkIdle();
         validate();
+        setDate();
         // Found how to do this here:
         // http://stackoverflow.com/questions/16219247/how-to-suppress-jquery-validation-submithandler-when-cancel-button-is-clicked
-        $( "#cancel" ).click( function(e){
+        $("#cancel").click(function(e) {
           e.preventDefault();
           window.location = "home.html";
-        } );
-      } ); // end ready
+        });
+      }); // end ready
+    </script>
+    <script>
+      //populate the date field of the form
+      //http://stackoverflow.com/questions/4479268/getting-a-parameter-on-the-url
+      function setDate() {
+        var url = window.location.href; //Gets the URL from the address bar
+        var appointmentParams = url.split('&');//splits on each parameter passed from the calendar page
+        var elem;
+        var monthNames = ["January", "February", "March", "April",
+          "May", "June", "July", "August", "September", "October",
+          "November", "December"];
+
+        //Set the hidden fields on the form
+        //http://www.echoecho.com/htmlforms07.htm
+        elem = document.getElementById("year");
+        elem.value = appointmentParams[0].split('=')[1]; //Stores the year in a hidden form element
+
+        elem = document.getElementById("month");
+        elem.value = appointmentParams[1].split('=')[1]; //Stores the month in a hidden form element
+
+        elem = document.getElementById("day");
+        elem.value = appointmentParams[2].split('=')[1]; //Stores the day in a hidden form element
+
+        elem = document.getElementById("time");
+        if (appointmentParams[3].split('=')[1] < 1000)
+        {
+          elem.value = "0" + appointmentParams[3].split('=')[1]; //Stores the time in a hidden form element
+        }
+        else {
+          elem.value = appointmentParams[3].split('=')[1]; //Stores the time in a hidden form element
+        }
+        //Populate the date field on the form
+        //http://stackoverflow.com/questions/7609130/set-the-value-of-a-input-field-with-javascript
+        elem = document.getElementById("date");
+        elem.value = appointmentParams[2].split('=')[1] + " " + monthNames[appointmentParams[1].split('=')[1]] + ", " + appointmentParams[0].split('=')[1];
+
+        //Populate the time field on the form
+        elem = document.getElementById("timeDisplay");
+        if (appointmentParams[3].split('=')[1] < 1000)
+        {
+          elem.value = "0" + appointmentParams[3].split('=')[1]; //Stores the time in a hidden form element
+        }
+        else {
+          elem.value = appointmentParams[3].split('=')[1]; //Stores the time in a hidden form element
+        }
+      }
+
     </script>
   </head>
   <body>
@@ -46,6 +94,22 @@
           <h2>Appointment Form</h2>
         </div>
         <form action="#" class="ui-helper-clearfix">
+          <div class="inputField">
+            <label for="date" class="formLabel">Date</label>
+            <div class="ui-corner-all">
+              <input type="text" id="date" name="date" readonly>
+              <input type="hidden" id="year" name="year">
+              <input type="hidden" id="month" name="month">
+              <input type="hidden" id="day" name="day">
+              <input type="hidden" id="time" name="time">
+            </div>
+          </div>
+          <div class="inputField">
+            <label for="time" class="formLabel">Time</label>
+            <div class="ui-corner-all">
+              <input type="text" id="timeDisplay" name="time" readonly>
+            </div>
+          </div>
           <div class="inputField">
             <label for="fname" class="formLabel">First Name</label>
             <div class="ui-corner-all">
@@ -73,7 +137,7 @@
           <!-- Cancel button gets class cancel so the validator will ignore it -->
           <button class="cancel" id="cancel" name="cancel">Cancel</button>
           <!-- Redirect to home page for now. -->
-          <button type="submit" formaction="home.html" formmethod="POST" id="submit" name="submit">Submit</button>
+          <button type="submit" formaction="writeJson.php" formmethod="POST" id="submit" name="submit">Submit</button>
         </form>
       </div>
       <div class="ui-widget-content ui-corner-all">
@@ -84,3 +148,4 @@
     </div>
   </body>
 </html>
+
