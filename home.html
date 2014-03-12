@@ -23,7 +23,6 @@
 
     <script src="js/jquery-ui/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
     <script src="js/employeeDatajs.js" type="text/javascript"></script>
-    <script src="js/animations.js" type="text/javascript"></script>
     <script src="js/angular/controllers.js" type="text/javascript"></script>
 
     <!-- The lines below is to link the css to this page. -->
@@ -61,7 +60,7 @@
 
     <div ng-controller="EmployeeCtrl" class="ui-widget ui-employees" id="employeeContent">
       <div ng-repeat="employee in employees" id="{{employee.firstName}}" class="emplyProfile ui-widget-content ui-corner-all">
-        <img ng-src="{{employee.img}}" class="pic" onclick="loadEmployeeCal({{employee.firstName}})">
+        <img ng-src="{{employee.img}}" ng-click="loadEmployeeCal('{{employee.firstName}}')" class="pic">
         <div class="ui-widget-header ui-corner-all empl-name-title">
           <h1>{{employee.firstName}}</h1>
           <h2>{{employee.jobTitle}}</h2>
@@ -71,10 +70,9 @@
           <li ng-repeat="expertise in employee.expertiseList">{{expertise}}</li>
         </ul>
       </div>
-      <!-- Dynamic content of employee data will be here -->
     </div>
+    
     <!-- footer -->
-
     <div id="footer">
       <ul class="nav">
         <li id="nav1">

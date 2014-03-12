@@ -11,4 +11,14 @@ employeeApp.controller('EmployeeCtrl', function($scope, $http) {
     $scope.employees = data;
     console.log("Found employeeData.json");
   });
+  
+  $scope.loadEmployeeCal = function(employeeId) {
+    var id = employeeId;
+    window.location = "calendar.html"; // take user to employee calendar
+    //  addHidden();
+    //  emplyProfileSwap();
+    //  $("#employeeContent").switchClass("ui-employees", 
+    //                                    "ui-employees-column", 
+    //                                    1000, "easeOutQuad");
+    };
 });

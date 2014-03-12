@@ -103,13 +103,13 @@ function emplyProfileSwap(){
   $(".emplyProfile").switchClass("emplyProfile", "emply-profile-col", 1000, "linear");
 }
 
-function loadEmployeeCal(employeeId) {
+/*function loadEmployeeCal(employeeId) {
   var id = employeeId;
-//  window.location = "calendar.html"; // take user to employee calendar
-  addHidden();
+  window.location = "calendar.html"; // take user to employee calendar
+//  addHidden();
 //  emplyProfileSwap();
 //    $("#employeeContent").switchClass("ui-employees", 
 //                                    "ui-employees-column", 
 //                                    1000, "easeOutQuad");
-}
+}*/
 
