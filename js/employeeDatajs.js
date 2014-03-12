@@ -17,7 +17,7 @@ var employeeId;
 // here so that the JSON file can be completely loaded before
 // we continue. On 'success', the callback function is called 
 // to store the data into the variable employeeData. 
-jQuery.ajax({
+/*jQuery.ajax({
   async: false,
   dataType: "json",
   url: "js/employeeData.json",
@@ -56,7 +56,7 @@ function placeEmployeeData() {
 
   // Place dynamic content on the page
   jQuery("#employeeContent").html(strContent);
-}
+} */
 
 // Once the document is ready, we can place the content.
 jQuery(document).ready(function() {
@@ -90,7 +90,7 @@ jQuery(document).ready(function() {
   });
 
   // Dynamic placement of employee content 
-  placeEmployeeData();
+  //placeEmployeeData();
 });
 
 
