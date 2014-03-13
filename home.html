@@ -60,7 +60,7 @@
 
     <div ng-controller="EmployeeCtrl" class="ui-widget ui-employees" id="employeeContent">
       <div ng-repeat="employee in employees" id="{{employee.firstName}}" class="emplyProfile ui-widget-content ui-corner-all">
-        <img ng-src="{{employee.img}}" ng-click="loadEmployeeCal('{{employee.firstName}}')" class="pic">
+        <img ng-src="{{employee.img}}" ng-click="loadEmployeeCal('{{employee.firstName}}')" class="pic ui-corner-all">
         <div class="ui-widget-header ui-corner-all empl-name-title">
           <h1>{{employee.firstName}}</h1>
           <h2>{{employee.jobTitle}}</h2>
