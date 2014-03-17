@@ -111,7 +111,6 @@ p#msg
   margin: 10px;
   border: 1px solid #dddddd;
   box-shadow: 10px 10px 5px #888;
-  border-radius: 4px;
 }
 
 .ui-employees .emply-profile-col, .ui-employees-column .emply-profile-col
@@ -125,16 +124,13 @@ p#msg
 img.pic
 {
   display: block;
-  margin-top: 5px;
+  margin-top: 9px;
+  margin-bottom: 9px;
   margin-left: auto;
   margin-right: auto;
   width: 200px;
   border: 1px solid #606060;
-  margin-left: auto;
-  margin-right: auto;
   box-shadow: 2px 2px 2px #888;
-  opacity: 0.9;
-  border-radius: 6px;
 }
 
 .ui-employees h1, .ui-employees h2{
@@ -144,42 +140,14 @@ img.pic
 /* Sets the <ul> tags properties for the navigation links menu. */
 ul.nav 
 {
-  height: 37px;
   padding: 0;
-  top: 0;
-  background: #deedf7;
-  list-style: none;
   text-align: center;
-}
-
-/* Sets the properties for the navigation links menu. */
-li.nav 
-{
-  display: inline-block; /* Align the navigation links side by side. */
-}
-
-/* Sets the properties to expertise list*/
-ul.expetiseList
-{
-  position: relative;
-  border: 1px solid #606060;
-  width: 200px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Sets the properties to expertise list bullets */
-li.expertiseBullet
-{
-  padding:10px;
 }
 
 /* Sets the properties to expertise list */
 lh.expertiseBullet
 {
   font-weight: bold;
-  font-size: 17px;
-  color: #362b36;
   border-bottom: 1px solid #606060;
   font-family: "Lucida Grande", "Lucida Sans", "Arial,sans-serif";
 }
@@ -200,27 +168,4 @@ lh.expertiseBullet
   left: 0;
   background: #deedf7;
 }
-
-
-/* Three of the attributes below are for setting the properties to links. */
-a:link
-{
-  color: #0070a3;
-  text-decoration: none;
-
-}
-
-
-a:visited
-{
-  color: #0070a3;
-  text-decoration: none;
-}
-
-a:hover
-{
-  color: #72a7cf;
-} 
-
-
 
