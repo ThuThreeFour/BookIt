@@ -75,6 +75,30 @@ jQuery(document).ready(function() {
      primary: "ui-icon-pencil" 
     }
   });
+  
+  // validating username and password
+  $("#usrLoginForm").validate({
+    rules: {
+      username: {
+        required: true
+        // rangelength:[7,10]
+      },
+      password: {
+        required: true
+      },
+      messages: {
+        username: {
+          required: "Please provide username"
+      },
+      password: {
+          required: "Please provide password"
+        }
+      }
+    }
+  });
+  
+  
+  
   // Setting properties to employee Log In button
   $("#nav1").button({
     icons: {
@@ -88,6 +112,7 @@ jQuery(document).ready(function() {
       primary: "ui-icon-home"
     }
   });
+  
 
   // Dynamic placement of employee content 
   placeEmployeeData();
