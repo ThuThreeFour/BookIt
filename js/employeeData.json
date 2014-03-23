@@ -1,58 +1,32 @@
 {
-  "employees": [ 
-    {
-      "img" : "images/ccPic.png", 
-      "firstName" : "Chris", 
-      "jobTitle" : "Job Title",
-      "expertiseList" : { 
-        "expertise" : [
-          [
-            "Expertise 1"
-          ],
-          [
-            "Expertise 2"
-          ],
-          [
-            "Expertise 3"
-          ]
-        ]
-      }
-    },
-    {
-      "img" : "images/ttPic.png", 
-      "firstName" : "Thu", 
-      "jobTitle" : "Job Title",
-            "expertiseList" : { 
-        "expertise" : [
-          [
-            "Expertise 1"
-          ],
-          [
-            "Expertise 2"
-          ],
-          [
-            "Expertise 3"
-          ]
-        ]
-      }
-    },
-    {
-      "img" : "images/jnPic.png",
-      "firstName" : "Jacob", 
-      "jobTitle" : "Job Title",
-            "expertiseList" : { 
-        "expertise" : [
-          [
-            "Expertise 1"
-          ],
-          [
-            "Expertise 2"
-          ],
-          [
-            "Expertise 3"
-          ]
-        ]
-      }
+  "employee1" : {
+    "img" : "images/ccPic.png",
+    "firstName" : "Chris",
+    "jobTitle" : "Job Title",
+    "expertiseList" : {
+      "expt1" : "Expertise 1",
+      "expt2" : "Expertise 2",
+      "expt3" : "Expertise 3"
     }
-    ]
+  },
+  "employee2" : {
+    "img" : "images/ttPic.png",
+    "firstName" : "Thu",
+    "jobTitle" : "Job Title",
+    "expertiseList" : {
+      "expt1" : "Expertise 1",
+      "expt2" : "Expertise 2",
+      "expt3" : "Expertise 3"
+    }
+  },
+  "employee3" : {
+    "img" : "images/jnPic.png",
+    "firstName" : "Jacob",
+    "jobTitle" : "Job Title",
+    "expertiseList" : {
+      "expt1" : "Expertise 1",
+      "expt2" : "Expertise 2",
+      "expt3" : "Expertise 3"
+    }
+  }
 }
