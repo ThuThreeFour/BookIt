@@ -8,7 +8,9 @@
  * (Documentation is a modification of Jesse Heines's work.)
  */
 
-
+body{
+  position: relative;
+}
 /* Sets the contents of top div containing banner and navigation menu. */
 #header 
 {
@@ -73,24 +75,52 @@ p#msg
   float: left;
 }
 
-/* Container of employee profiles */
+/* Container of employee profiles
 .ui-employees
 {
   width: 745px;
   margin: 145px auto;
   margin-bottom: 0;
   padding: 10px;
+} */
+
+.ui-employees .ChrisA {
+  position: absolute;
+  top: 155px;
+  left: 310px;
+  z-index: -4;
 }
 
-.ui-employees-column
-{
-  margin-top: 160px;
-  padding: 10px 10px 10px 10px;
-  width: 240px;
-  //border: solid black;
-  height: 550px;
-  overflow: auto;
-  
+.ui-employees .ChrisB {
+  position: absolute;
+  top: 155px;
+  left: 20px;
+}
+
+.ui-employees .ThuA {
+  position: absolute;
+  top: 155px;
+  left: 560px;
+  z-index: -3;
+}
+
+.ui-employees .ThuB {
+  position: absolute;
+  top: 395px;
+  left: 20px;
+}
+
+.ui-employees .JacobA {
+  position: absolute;
+  top: 155px;
+  left: 810px;
+  z-index: -2;
+}
+
+.ui-employees .JacobB {
+  position: absolute;
+  top: 635px;
+  left: 20px;
 }
 
 .hidden
@@ -99,29 +129,29 @@ p#msg
 }
 
 .ui-employees .ui-widget-header{
-    margin: 10px;
-    height: 100px;
+  margin: 10px;
+  height: 100px;
 }
 
 /* Container of individual employee profile */
 .ui-employees .emplyProfile
 {
-  display: inline-block;
+  //display: inline-block;
   width: 220px;
-  margin: 10px;
-  border: 1px solid #dddddd;
+  //margin: 10px;
+  //border: 1px solid #dddddd;
   box-shadow: 10px 10px 5px #888;
 }
 
-.ui-employees .emply-profile-col, .ui-employees-column .emply-profile-col
+.ui-employees .emplyProfileB
 {
   width: 220px;
+  height: 220px;
   box-shadow: 10px 10px 5px #888;
-  height: 215px;
 }
 
 /* Set properties to employee pictures*/
-img.pic
+.ui-employees .pic
 {
   display: block;
   margin-top: 9px;
@@ -134,7 +164,7 @@ img.pic
 }
 
 .ui-employees h1, .ui-employees h2{
-    margin: 10px;
+  margin: 10px;
 }
 
 /* Sets the <ul> tags properties for the navigation links menu. */
@@ -167,5 +197,20 @@ lh.expertiseBullet
   bottom: 0;
   left: 0;
   background: #deedf7;
+  z-index: 999;
 }
 
+.ui-employees .primary {
+  position: absolute;
+  top: 200px;
+  left: 280px;
+  z-index: -1;
+}
+
+#calendarDiv{
+    position: absolute;
+    top: 335px;
+    left: 700px;
+    transform: scale(2);
+    z-index: -999;
+}
