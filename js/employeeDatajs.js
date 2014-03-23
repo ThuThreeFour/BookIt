@@ -17,7 +17,7 @@ var employeeId;
 // here so that the JSON file can be completely loaded before
 // we continue. On 'success', the callback function is called 
 // to store the data into the variable employeeData. 
-jQuery.ajax({
+/*jQuery.ajax({
   async: false,
   dataType: "json",
   url: "js/employeeData.json",
@@ -33,13 +33,14 @@ function placeEmployeeData() {
   // create dynamic content of employees' data from employeeData.json
   // loop through all employees
   for (var empl = 0; empl < employeeData.employees.length; empl++) {
-    strContent += "<div class='emplyProfile ui-widget-content ui-corner-all'>";
-    //strContent += '<img src="' + employeeData.employees[empl].img + '"' + 'class="' + 'pic' + '" >';
     employeeId = employeeData.employees[empl].firstName;
+    
+    strContent += "<div id='" + employeeId + "' class='emplyProfile ui-widget-content ui-corner-all'>";
+    //strContent += '<img src="' + employeeData.employees[empl].img + '"' + 'class="' + 'pic' + '" >';
     //strContent += '<img src=' + employeeData.employees[empl].img + " " + 'class=' + 'pic' + " " + 'id="' + employeeId + '" ' + "onclick=loadEmployeeCal(" + '"' + employeeId + '"' + ')' + '>';
     // sets corresponding id to employee image  
-    strContent += "<img src='" + employeeData.employees[empl].img + "' class='pic' id='" + employeeId + "' ";
-    strContent += "onclick='loadEmployeeCal(\"" + employeeId + "\")'>";
+    strContent += "<img src='" + employeeData.employees[empl].img + "' class='pic ui-corner-all' "
+;    strContent += "onclick='loadEmployeeCal(\"" + employeeId + "\")'>";
     //document.getElementById()
     strContent += "<div class='ui-widget-header ui-corner-all empl-name-title'>";
     strContent += "<h1>" + employeeId + "</h1>";
@@ -56,7 +57,7 @@ function placeEmployeeData() {
 
   // Place dynamic content on the page
   jQuery("#employeeContent").html(strContent);
-}
+} */
 
 // Once the document is ready, we can place the content.
 jQuery(document).ready(function() {
@@ -88,12 +89,13 @@ jQuery(document).ready(function() {
       primary: "ui-icon-home"
     }
   });
-
-  // Dynamic placement of employee content 
-  placeEmployeeData();
+  
+  $(function() {
+    $("#calendarDiv").datepicker(
+    //{
+    // changeMonth: true,
+    // changeYear: true
+    //}
+   );
+  });
 });
-
-
-
-
-
