@@ -116,24 +116,14 @@ jQuery(document).ready(function() {
 
   // Dynamic placement of employee content 
   //placeEmployeeData();
+
+  $(function() {
+    $("#calendarDiv").datepicker(
+    //{
+    // changeMonth: true,
+    // changeYear: true
+    //}
+   );
+  });
+
 });
-
-function addHidden(){
-  $(".emplyProfile .ui-widget-header").addClass("hidden", 100);
-  $(".expertiseList").addClass("hidden", 100);
-}
-
-function emplyProfileSwap(){
-  $(".emplyProfile").switchClass("emplyProfile", "emply-profile-col", 1000, "linear");
-}
-
-/*function loadEmployeeCal(employeeId) {
-  var id = employeeId;
-  window.location = "calendar.html"; // take user to employee calendar
-//  addHidden();
-//  emplyProfileSwap();
-//    $("#employeeContent").switchClass("ui-employees", 
-//                                    "ui-employees-column", 
-//                                    1000, "easeOutQuad");
-}*/
-
