@@ -99,7 +99,6 @@ jQuery(document).ready(function() {
   });
   
   
-  
   // Setting properties to employee Log In button
   $("#nav1").button({
     icons: {

@@ -20,5 +20,10 @@ employeeApp.controller('EmployeeCtrl', function($scope, $http) {
     //  $("#employeeContent").switchClass("ui-employees", 
     //                                    "ui-employees-column", 
     //                                    1000, "easeOutQuad");
-    };
+    };  
+});
+
+// storing registration information into JSON file 
+employeeApp.controller('ClientLoginCtrl', function($scope, $http){
+  $http.post('js/ClientInformation.json')
 });
