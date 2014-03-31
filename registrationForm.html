@@ -15,7 +15,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
     <!--
     <link rel="stylesheet" href="development-bundle/themes/cupertino/jquery.ui.all.css">
     -->
@@ -62,7 +61,7 @@
           <h2>Registration Form</h2>
         </div>
         <div ng-controller="ClientLoginCtrl" id="loginRegister">
-        <form id="registrationform" action="#" class="ui-helper-clearfix">
+        <form id="registrationform" class="ui-helper-clearfix">
           <div class="inputField">
             <label for="fname" class="formLabel">First Name</label>
             <div class="ui-corner-all">
@@ -108,10 +107,9 @@
           <!-- Cancel button gets class cancel so the validator will ignore it -->
           <button class="cancel" id="cancel" name="cancel">Cancel</button>
           <!-- Redirect to home page for now. -->
-          <button type="submit" formaction="home.html" formmethod="POST" id="submit" name="submit">Submit</button>
+          <button type="submit" formaction="saveClientInfo.php" formmethod="POST" id="submit" name="submit">Submit</button>
         </form>
     </div>
       </div>
   </body>
 </html>
-
