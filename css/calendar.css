@@ -8,6 +8,26 @@ and open the template in the editor.
     Author     : ccompton-mac
 */
 
+/*
+  Styles the unordered list from which users will select a time they would like
+  to sign up for.
+  http://stackoverflow.com/questions/1027354/need-a-unordered-list-without-any-bullets
+*/
+.timeList
+{
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  list-style-type: none;
+}
+
+.timeListItem
+{
+  border: 1px solid black;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
 .currentmonth{  
   color: blue;  
   text-align: center;  
@@ -17,6 +37,12 @@ and open the template in the editor.
   color: #00FF00;  
   text-align: center;  
 }
+
+.ui-dialog{
+  z-index: 999;
+//  position: absolute;
+}
+
 /*http://www.w3schools.com/css/css_table.asp*/
 .calendarDiv{
   text-align: center;
