@@ -101,6 +101,7 @@ function buildCalendar(date) {
   var content = "";
   var dayNum = 1; //used for enumerating days on the calendar
   //var current = date;
+  var availableDays;
 
   //in the case that no date has been passed in, lets use a default
   if (date !== undefined)
@@ -112,6 +113,22 @@ function buildCalendar(date) {
   var weekDay = currentCalendarDate.getDay();//returns a day num from 0-6
   var year = currentCalendarDate.getFullYear(); //returns four digit year
   var foundFirst = 0;//boolean used for correct day printing on calendar
+  
+  jQuery.ajax({
+        async: false,
+        dataType: "json",
+        url: "json/" + month + "_" + year + ".json",
+        success: function(data) {
+          availableDays = data;
+          console.log("HERE!");
+          console.log(data[0]["1000"]);
+        },
+        error: function(data) {
+          console.log("ERRORS");
+        }
+      });
+  
+  
 
   //We need certain information about the first of the month
   //  Found this site especially helpful:
@@ -189,9 +206,14 @@ function buildCalendar(date) {
           content += "<td class=\"calendarDay\">" + dayNum + "</td>";
         }
         //Makes every day that we have passed in previous months/years unclickable
-        else if (currentCalendarDate.getMonth() < currentDate.getMonth() || currentCalendarDate.getFullYear() < currentDate.getFullYear())
+        else if (currentCalendarDate.getMonth() < currentDate.getMonth() && currentCalendarDate.getFullYear() === currentDate.getFullYear() || currentCalendarDate.getFullYear() < currentDate.getFullYear())
         {
           content += "<td class=\"calendarDay\">" + dayNum + "</td>";
+        }
+        //Make sure the day isn't full already
+        else if(dayFull(availableDays[dayNum]))
+        {
+          content += "<td class=\"calendarDayInactive\">" + dayNum + "</td>";
         }
         else
         {
@@ -222,6 +244,13 @@ function buildCalendar(date) {
   content += "</div></div>";
   //Throw our HTML into the calendar div, which is a placeholder of the widget
   jQuery(".calendarDiv").html(content);
+}
+
+//This function will take a day out of the JSON file and will return true
+//if a time is available and false if there is not an available time
+function dayFull(day)
+{
+  
 }
 
 //This function is used to highlight the day that the user is trying
