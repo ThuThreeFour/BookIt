@@ -32,7 +32,7 @@
       jQuery(document).ready(function() {
         checkIdle();
         validateForm();
-	setDate();
+        setDate();
         // Found how to do this here:
         // http://stackoverflow.com/questions/16219247/how-to-suppress-jquery-validation-submithandler-when-cancel-button-is-clicked
         $("#cancel").click(function(e) {
@@ -48,9 +48,20 @@
         var url = window.location.href; //Gets the URL from the address bar
         var appointmentParams = url.split('&');//splits on each parameter passed from the calendar page
         var elem;
-        var monthNames = ["January", "February", "March", "April",
-          "May", "June", "July", "August", "September", "October",
-          "November", "December"];
+        var monthNames = {//http://stackoverflow.com/questions/1168807/how-can-i-add-a-key-value-pair-to-a-javascript-object-literal
+          "1": "January",
+          "2": "February",
+          "3": "March",
+          "4": "April",
+          "5": "May",
+          "6": "June",
+          "7": "July",
+          "8": "August",
+          "9": "September",
+          "10": "October",
+          "11": "November",
+          "12": "December"
+        };
 
         //Set the hidden fields on the form
         //http://www.echoecho.com/htmlforms07.htm
@@ -74,16 +85,16 @@
         //Populate the date field on the form
         //http://stackoverflow.com/questions/7609130/set-the-value-of-a-input-field-with-javascript
         elem = document.getElementById("date");
-        elem.value = appointmentParams[2].split('=')[1] + " " + monthNames[appointmentParams[1].split('=')[1]] + ", " + appointmentParams[0].split('=')[1];
+        elem.innerHTML = appointmentParams[2].split('=')[1] + " " + monthNames[appointmentParams[1].split('=')[1]] + ", " + appointmentParams[0].split('=')[1];
 
         //Populate the time field on the form
         elem = document.getElementById("timeDisplay");
         if (appointmentParams[3].split('=')[1] < 1000)
         {
-          elem.value = "0" + appointmentParams[3].split('=')[1]; //Stores the time in a hidden form element
+          elem.innerHTML = "0" + appointmentParams[3].split('=')[1]; //Stores the time in a hidden form element
         }
         else {
-          elem.value = appointmentParams[3].split('=')[1]; //Stores the time in a hidden form element
+          elem.innerHTML = appointmentParams[3].split('=')[1]; //Stores the time in a hidden form element
         }
       }
 
@@ -99,7 +110,7 @@
           <div class="inputField">
             <label for="date" class="formLabel">Date</label>
             <div class="ui-corner-all">
-              <input type="text" id="date" name="date" readonly>
+              <span id="date"></span>
               <input type="hidden" id="year" name="year">
               <input type="hidden" id="month" name="month">
               <input type="hidden" id="day" name="day">
@@ -109,7 +120,7 @@
           <div class="inputField">
             <label for="time" class="formLabel">Time</label>
             <div class="ui-corner-all">
-              <input type="text" id="timeDisplay" name="time" readonly>
+              <span id="timeDisplay"></span>
             </div>
           </div>
           <div class="inputField">
