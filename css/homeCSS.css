@@ -20,7 +20,7 @@ body{
   background: #deedf7;
   height: 150px;
   width: 100%;
-  z-index: 999;
+  z-index: 899;
 }
 
 #header #imgage
@@ -197,7 +197,7 @@ lh.expertiseBullet
   bottom: 0;
   left: 0;
   background: #deedf7;
-  z-index: 999;
+  z-index: 899;
 }
 
 .ui-employees .primary {
