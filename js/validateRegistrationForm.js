@@ -1,18 +1,20 @@
 /* 
- * validateForm.js
- * Christopher Compton
- * christopher.j.compton@gmail.com
+ * validateRegistrationForm.js
+ * Original Author: Christopher Compton
+ * Email: christopher.j.compton@gmail.com
  * christopher_compton@student.uml.edu
- * Undergraduate Student at UMass Lowell
+ * Author: Thu Tran
+ * Email: thu_tran2@student.uml.edu
+ * Updated: March 22, 2014
+ * Undergraduate Students at UMass Lowell
  * 91.462 GUI Programming II
  *
- * Created on 02-22-2014 CJC
  */
 
-function validateForm(){
+function validateRegistrationForm(){
   // Changes to the validator options are based on the documentation
   // found here: http://jqueryvalidation.org/validate#toptions
-  $( 'form' ).validate( {
+  $( '#registrationform' ).validate( {
     // Change the default container that the error messages are placed
     errorElement: "p",
     rules: {
@@ -22,13 +24,24 @@ function validateForm(){
       lname: {
         required: true
       },
-      phoneNum: {
-        required: true,
-        phoneUS: true
-      },
       email: {
         required: true,
         email: true
+      },
+      confirmEmail: {
+        equalTo: "#email",
+        required: true
+      },
+      password: {
+        required: true
+      },
+      confirmPassword: {
+        required: true,
+        equalTo: "#password"
+      },
+      phoneNum: {
+        required: true,
+        phoneUS: true
       }
     }, // end rules
     messages: {
@@ -38,12 +51,24 @@ function validateForm(){
       lname: {
         required: "Please provide your last name"
       },
-      phoneNum: {
-        required: "Please enter a phone number"
-      },
       email: {
         required: "Please provide an email address",
         email: "Please enter in the form of name@domain.com"
+      },
+      confirmEmail: {
+        equalTo: "Email does not match",
+        required: "Please provide an email address"
+      },
+      password:{
+        required: "Please provide a password"
+      },
+      confirmPassword: {
+        required: "Please provide a password",
+        equalTo: "Password does not match"
+      },
+      phoneNum: {
+        required: "Please enter a phone number",
+        phoneUS: "Please enter valid 10 digit US phone number"
       }
     }, // end messages
     // Modify the default placement of the error
@@ -66,3 +91,4 @@ function validateForm(){
     } // end unhighlight
   } ); // end validate
 }
+

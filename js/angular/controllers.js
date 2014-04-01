@@ -14,7 +14,7 @@ employeeApp.controller('EmployeeCtrl', function($scope, $http) {
   
   $scope.loadEmployeeCal = function(event, employeeId) {
     var id = employeeId;
-    
+    //window.location = "calendar.html"; // take user to employee calendar
     if( $("#calendarDiv").css("display") === "block"){
       $("#calendarDiv").toggle("scale", { "percent": 0, "duration": 1000, "queue": false});
     }
@@ -47,4 +47,9 @@ employeeApp.controller('EmployeeCtrl', function($scope, $http) {
       "queue": true
     });
   };
+});
+
+// storing registration information into JSON file 
+employeeApp.controller('ClientLoginCtrl', function($scope, $http){
+  $http.post('js/ClientInformation.json');
 });
