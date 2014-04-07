@@ -15,17 +15,16 @@ and open the template in the editor.
 </html>
 
 <?php
-$loggerOutput = "COOL DUDE IN THE LOG";
-file_put_contents("json/log.out", $loggerOutput);
+addToLog("In writeJson.php\n");
 
-
-if ($_POST['function'] == "writeDefaultMonth") {
-  $loggerOutput .= "months: " . $_POST['month'] . " year: " . $_POST['year'] . "\n";
-  file_put_contents("json/log.out", $loggerOutput);
-  writeDefaultMonth($_POST['month'], $_POST['year']);
+if(isset($_POST['function'])) {
+  if ($_POST['function'] == "writeDefaultMonth") {
+    addToLog("function called: writeDefaultMonth month: " . $_POST['month'] . " year: " . $_POST['year'] . "\n");
+    writeDefaultMonth($_POST['month'], $_POST['year']);
+  }
 }
-$loggerOutput .= "function: " . $_POST['function'] . " month: " . $_POST['month'] . " year: " . $_POST['year'] . "\n";
-file_put_contents("json/log.out", $loggerOutput);
+
+addToLog("not calling writeDefaultMonth");
 reserveAppointment();
 
 function reserveAppointment() {
@@ -37,39 +36,58 @@ function reserveAppointment() {
   $name = $_POST['fname'] . " " . $_POST['lname'];
   $phone = $_POST['phoneNum'];
   $email = $_POST['email'];
-
+  
+  addToLog("In function reserveAppointment()");
 
   //Following based off of : 
   //http://stackoverflow.com/questions/8858848/php-read-and-write-json-from-file
   $file = "$month" . "_" . "$year.json";
-
+  addToLog("Looking for file: $file");
   //If the file we want to write to doesn't exist, we should probably create it
   if (file_exists("json/$file")) {
+    addToLog("json/$file exists");
     //To avoid a fatal error
     //http://stackoverflow.com/questions/6815520/cannot-use-object-of-type-stdclass-as-array
     //This will decode existing JSON files to be edited
     $json = json_decode(file_get_contents("json/$file"), true);
+    addToLog("json_decode of $file resulted in:\n " . json_encode($json) . "\n");
 
+    addToLog("json[$day][$time] before change: " . $json[$day][$time]);
     //Store the person's name in the JSON file to reserve the appointment
     $json[$day][$time] = array("name" => $name, "phoneNum" => $phone, "email" => $email);
-
+    addToLog("json[$day][$time] after change: Name: " . $json[$day][$time]["name"] . " Phone Number: " . $json[$day][$time]["phoneNum"] . " Email: " . $json[$day][$time]["email"]);
+    
     //Rewrite changes to disk
     //Pretty printing from: http://stackoverflow.com/questions/7097374/php-pretty-print-json-encode
     //Due to file permissions on weblab, we have to create the file in /tmp
     //and move it to the json folder
+    addToLog("saving $file to /tmp/$file with contents:\n" . json_encode($json));
     file_put_contents("/tmp/$file", json_encode($json));
+    addToLog("Moving file /tmp/$file to json/$file");
     exec("mv /tmp/$file json/");
   } else {
+    addToLog("File doesn't exist");
     //The month file doesn't exist, lets create it
     //Because of file permissions on weblab, we have to create the file
     //in tmp and then move it to the json folder
+    addToLog("creating new default month, placing in /tmp/$file");
+    addToLog("json_encode(buildDefaultMontH(): " . json_encode(buildDefaultMonth()));
     file_put_contents("/tmp/$file", json_encode(buildDefaultMonth()));
+    addToLog("mv from /tmp/$file to json/$file");
     exec("mv /tmp/$file json/");
+    
     //Do the same thing as up above
+    
+    $json = json_decode(file_get_contents("json/$file"), true);
+    addToLog("json_decode of $file resulted in:\n $json");
 
-    $json = json_decode(file_get_contents($file), true);
+    addToLog("json[$day][$time] before change: " . $json[$day][$time]);
+    //Store the person's name in the JSON file to reserve the appointment
     $json[$day][$time] = array("name" => $name, "phoneNum" => $phone, "email" => $email);
-    file_put_contents($file, json_encode($json, JSON_PRETTY_PRINT));
+    addToLog("json[$day][$time] after change: " . $json[$day][$time]);
+    file_put_contents("/tmp/$file", json_encode($json));
+    addToLog("mv from /tmp/$file to json/$file");
+    exec("mv /tmp/$file json/");
   }
 
   //Since we are done lets go home
@@ -97,12 +115,22 @@ function buildDefaultMonth() {
 
 function writeDefaultMonth($month, $year) {
   $file = "$month" . "_" . "$year.json";
-  file_put_contents("json/log.out", "writing Default Month");
+  
+  addToLog("In function writeDefaultMonth()");
+  addToLog("writing a default month to disk ($file) and placing in /tmp");
   //because of file permissions on weblab we have to create the file in /tmp
   //and then move it to the json folder
-  file_put_contents("/tmp/$file", json_encode(buildDefaultMonth(), JSON_PRETTY_PRINT));
+  file_put_contents("/tmp/$file", json_encode(buildDefaultMonth()));
+  addToLog("mv from /tmp/$file to json/$file");
   exec("mv /tmp/$file json");
   return;
   //header('Location: home.html');
+}
+
+function addToLog($string) {
+  
+  file_put_contents("/tmp/log.out", date("Y-m-d H:i:s") . ": " .  $string . "\n", FILE_APPEND);
+  exec("cp /tmp/log.out json");
+  
 }
 ?>
