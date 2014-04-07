@@ -293,7 +293,7 @@ function dayFree(date)
     9 : "1700"
   };
   
-  //console.log("date: " + date + " Month: " + date.getMonth());
+  console.log("Opening " + month + "_" + year + ".json");
   
   jQuery.ajax({
         async: false,
@@ -306,6 +306,7 @@ function dayFree(date)
         error: function(data) {
           //http://stackoverflow.com/questions/6371857/how-to-call-a-specific-function-in-a-php-script-via-ajax
           //Will create a json file for the current month
+          console.log("Error encountered opening file month: " + month + " year: " + year);
           jQuery.ajax({
             method : "post",
             url : "writeJson.php",
