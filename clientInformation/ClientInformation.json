@@ -1,31 +1,17 @@
 [
     {
         "fname": "thu",
-        "lname": "TRAN",
-        "email": "t@gmail.com"
-    },
-    {
-        "fname": "thu",
-        "lname": "TRAN",
-        "email": "t@gmail.com"
-    },
-    {
-        "fname": "thu",
-        "lname": "TRAN",
-        "email": "t@gmail.com"
-    },
-    {
-        "fname": "thu",
         "password": "1",
-        "lname": "TRAN",
-        "email": "t@gmail.com",
-        "phoneNum": "9787896754"
+        "lname": "tran",
+        "email": "four@gmail.com",
+        "phoneNum": "9787777777"
     },
     {
-        "fname": "thu",
-        "password": "1",
-        "lname": "TRAN",
-        "email": "t@gmail.com",
-        "phoneNum": "9787896754"
+        "fname": "thj",
+        "password": "12345678",
+        "lname": "jhjk",
+        "email": "t65@u.c",
+        "phoneNum": "9785555555",
+        "sessionId": "d49ea5e10f4436b036b7c8b7c0d747ad"
     }
 ]

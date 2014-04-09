@@ -11,7 +11,7 @@
       ClientInformation.json.
       Original source of the code and logic used to save information into JSON was used from :
       http://coursesweb.net/php-mysql/add-form-data-text-file-json-format_t
-      Updated: March 27, 2014
+      Updated: April 8, 2014
       (Documentation is a modification of Professor Jesse Heines's work.)
     -->
     
@@ -32,40 +32,54 @@
   <body>  
     <?php
       // Append new form data in json string saved in json file
-     
       // adds form data into an array
         $formdata = array(
           'fname' => $_POST['fname'],
           'password'=> $_POST['password'],
           'lname' => $_POST['lname'],
           'email' => $_POST['email'],
-          'phoneNum' => $_POST['phoneNum']      
-        );     
+          'phoneNum' => $_POST['phoneNum'],
+            'sessionId' => '', // initially has no value until user is successfully injected into json
+        ); 
+        
+        header('saveClientInfo.php');
+    
                 
       // path and name of the file
       $filetxt = 'clientInformation/ClientInformation.json';
       
       $clientData = array(); // to store all form data
       
-      
-        
+           
       // check if the file exists
       if(file_exists($filetxt)) {
         // gets json-data from file
         $jsondata = file_get_contents($filetxt);
- /*       
+ 
+        //genrate random num as session id for each user 
+        function generateRandID(){
+          $randomNum = md5(uniqid(rand(), true));
+          return $randomNum;
+        }
+        $usrId = generateRandID();
+        
+        
+        
+   //iterate thru json file  
         $jsonIterator = new RecursiveIteratorIterator(
     new RecursiveArrayIterator(json_decode($jsondata, TRUE)),
     RecursiveIteratorIterator::SELF_FIRST);
 
 foreach ($jsonIterator as $key => $val) {
-   if(is_array($val)) {
-        echo "$key:\n";
-    } else {
-        echo "$key => $val\n";
-    }
-
-}*/
+  if($val === $usrId){
+    //console.log("$usrId exist ");
+    $newUsrId = generateRandID();
+    $formdata['sessionId'] = $newUsrId;
+    break;
+  }else {
+    $formdata['sessionId'] = $usrId;
+  }
+}
         
       
         // converts json string into array
@@ -80,12 +94,11 @@ foreach ($jsonIterator as $key => $val) {
         if(file_put_contents('clientInformation/ClientInformation.json', $jsondata)){
           // echo 'Data successfully saved';
           echo '<p> Thank you for registering. Your account was successfully created. 
-            A confirmation email has been sent to your email ==== maybe show email here =====.  
-          </p>';
-          echo md5(uniqid(rand(), true));
+            A confirmation email has been sent to your email ' . $formdata['email'] . '</p>';
+          //echo md5(uniqid(rand(), true));
      
         } else {
-          echo 'Unable to save data in "clientInformation/ClientInformation.json"';
+          echo '<p>An error occured, account was not successfully created. Please try again.</p>';
         }
      
      }else {

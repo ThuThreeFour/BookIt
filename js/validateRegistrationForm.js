@@ -11,7 +11,61 @@
  *
  */
 
+      var userLoginInfo;
+
+      // The ajax call allows for synchronous loading, which is needed
+      // here so that the JSON file can be completely loaded before
+      // we continue. On 'success', the callback function is called 
+      // to store the data into the variable story.
+      jQuery.ajax({
+        async: false,
+        dataType: "json",
+        url: "clientInformation/ClientInformation.json",
+        success: function(data) {
+          userLoginInfo = data;
+        }
+      });
+
 function validateRegistrationForm(){
+  /* // validate if email already associate with known account
+  var email = getParameter("email");
+  //var email = "t@gmail.com";
+  if(email === null ){
+    console.log("email is null");
+  } else{
+  for(var count = 0; count < userLoginInfo.length; count++){
+    if(email === userLoginInfo[count].email){
+      console.log(userLoginInfo[count].email);
+      $(this).html("This email already exists");
+      //$('input[name=email]').attr('disabled', true);
+      break;
+      //console.log("email is found");
+    } 
+    else {
+      $(this).html("This email already exists");
+      $('input[name=email]').attr('disabled', false);
+    }
+  } 
+  }*/
+  $('#registrationform').keypress(function(event){
+    if(event.keyCode === 10 || event.keyCode === 13) event.preventDefault();
+  });
+  
+  $.validator.addMethod("alreadyExist", 
+    function(value){
+      flag = true;
+      console.log(value);
+      for(var count = 0; count < userLoginInfo.length; count++){
+        //console.log(userLoginInfo.length);
+        if(value === userLoginInfo[count].email){
+          console.log( "Value: " + value + "; Email Entered: " + userLoginInfo[count].email );
+          flag = false;
+          break;
+        }
+      }
+      return flag;    
+  });
+  
   // Changes to the validator options are based on the documentation
   // found here: http://jqueryvalidation.org/validate#toptions
   $( '#registrationform' ).validate( {
@@ -25,6 +79,7 @@ function validateRegistrationForm(){
         required: true
       },
       email: {
+        alreadyExist: true,
         required: true,
         email: true
       },
@@ -33,10 +88,14 @@ function validateRegistrationForm(){
         required: true
       },
       password: {
+        minlength: 8,
+        maxlength: 16,
         required: true
       },
       confirmPassword: {
-        required: true,
+        // range rule will not properly validate
+        minlength: 8,
+        maxlength: 16,
         equalTo: "#password"
       },
       phoneNum: {
@@ -52,6 +111,7 @@ function validateRegistrationForm(){
         required: "Please provide your last name"
       },
       email: {
+        alreadyExist: "An account with this email already exists.",
         required: "Please provide an email address",
         email: "Please enter in the form of name@domain.com"
       },
@@ -59,11 +119,14 @@ function validateRegistrationForm(){
         equalTo: "Email does not match",
         required: "Please provide an email address"
       },
-      password:{
+      password:{ 
+        minlength: "length too short",
+        maxlength: "length too long",
         required: "Please provide a password"
       },
       confirmPassword: {
-        required: "Please provide a password",
+        minlength: "length too short",
+        maxlength: "length too long",
         equalTo: "Password does not match"
       },
       phoneNum: {
