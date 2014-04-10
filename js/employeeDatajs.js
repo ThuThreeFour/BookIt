@@ -10,179 +10,77 @@
  *  (Documentation is a modification of Jesse M. Heines's (JMH) work.)
  */
 
-var employeeData;
-var employeeId;
 var tableBackgroundColor;
 var availableDays;
 
-// The ajax call allows for synchronous loading, which is needed
-// here so that the JSON file can be completely loaded before
-// we continue. On 'success', the callback function is called 
-// to store the data into the variable employeeData. 
-/*jQuery.ajax({
- async: false,
- dataType: "json",
- url: "js/employeeData.json",
- success: function(data) {
- employeeData = data;
- }
- });
- 
- function placeEmployeeData() {
- 
- 
- var strContent = " ";
- // create dynamic content of employees' data from employeeData.json
- // loop through all employees
- for (var empl = 0; empl < employeeData.employees.length; empl++) {
- employeeId = employeeData.employees[empl].firstName;
- 
- strContent += "<div id='" + employeeId + "' class='emplyProfile ui-widget-content ui-corner-all'>";
- //strContent += '<img src="' + employeeData.employees[empl].img + '"' + 'class="' + 'pic' + '" >';
- //strContent += '<img src=' + employeeData.employees[empl].img + " " + 'class=' + 'pic' + " " + 'id="' + employeeId + '" ' + "onclick=loadEmployeeCal(" + '"' + employeeId + '"' + ')' + '>';
- // sets corresponding id to employee image  
- strContent += "<img src='" + employeeData.employees[empl].img + "' class='pic ui-corner-all' "
- ;    strContent += "onclick='loadEmployeeCal(\"" + employeeId + "\")'>";
- //document.getElementById()
- strContent += "<div class='ui-widget-header ui-corner-all empl-name-title'>";
- strContent += "<h1>" + employeeId + "</h1>";
- strContent += "<h2>" + employeeData.employees[empl].jobTitle + "</h2>";
- strContent += "</div>";
- strContent += "<ul class=" + "expertiseList" + ">";
- strContent += "<lh class=" + "expertiseBullet" + ">" + "Expertise" + "</lh>";
- // loop through employee's expertise list
- for (var exprt = 0; exprt < employeeData.employees[empl].expertiseList.expertise.length; exprt++) {
- strContent += "<li>" + employeeData.employees[empl].expertiseList.expertise[exprt] + "</li>";
- }
- strContent += "</ul></div>";
- }
- 
- // Place dynamic content on the page
- jQuery("#employeeContent").html(strContent);
- } */
+// Initialize to current date so that we can immediately grab the appropriate
+// JSON file.
+var date;
+var tempDate = date = new Date();
+var currDay = date.getDate();
+var currMonth = date.getMonth() + 1; //This will probably cause an off by one error at some point
+var currYear = date.getFullYear();
 
-// Once the document is ready, we can place the content.
-jQuery(document).ready(function() {
+console.log("=================");
+console.log("INITIAL PAGE LOAD");
+console.log("=================");
 
-  // Setting properties to Log In button 
-  $("#loginButton").button({
-    label: "Log In", // give label to login button 
-    icons: {
-      primary: "ui-icon-person" // person icon 
-    }
-  });
+console.log("Day : " + currDay);
+console.log("Month: " + currMonth);
+console.log("Year: " + currYear);
 
-  $("#registerButton").button({
-    label: "Register",
-    icons: {
-      primary: "ui-icon-pencil"
-    }
-  });
-  // Setting properties to employee Log In button
-  $("#nav1").button({
-    icons: {
-      primary: "ui-icon-person"
-    }
-  });
-
-  // Setting property to Home button
-  $("#nav2").button({
-    icons: {
-      primary: "ui-icon-home"
-    }
-  });
-
-
-
-  //courtesy of http://stackoverflow.com/questions/887696/jquery-datepicker-onselect-wont-work
-  $(function() {
-    $("#calendarDiv").datepicker({
-      onSelect: function(date) {
-        console.log(date);
-        buildDay(date);
-      },
-      //Courtesy of:
-      //http://forum.jquery.com/topic/making-past-dates-unselectable-unclickable
-      minDate : 0,
-      beforeShowDay : dayFree
-    }
-
-    //{
-    // changeMonth: true,
-    // changeYear: true
-    //}
-    );
-  });
-});
+//Load the json file so we can see what timeslots are available
+availableDays = getJsonFile(currYear, currMonth);
 
 //This function will populate a jQuery dialog box with all times for the selected day
 function buildDay(date) {
   var content = "";
-  var monthNames = { //http://stackoverflow.com/questions/1168807/how-can-i-add-a-key-value-pair-to-a-javascript-object-literal
-    1 : "January",
-    2 : "February",
-    3 : "March",
-    4 : "April",
-    5 : "May",
-    6 : "June",
-    7 : "July",
-    8 : "August",
-    9 : "September",
-    10 : "October",
-    11 : "November",
-    12 : "December"
+  //http://stackoverflow.com/questions/1168807/how-can-i-add-a-key-value-pair-to-a-javascript-object-literal
+  var monthNames = {
+    1: "January",
+    2: "February",
+    3: "March",
+    4: "April",
+    5: "May",
+    6: "June",
+    7: "July",
+    8: "August",
+    9: "September",
+    10: "October",
+    11: "November",
+    12: "December"
   };
   var timeStrings = {
-    0 : "0800",
-    1 : "0900",
-    2 : "1000",
-    3 : "1100",
-    4 : "1200",
-    5 : "1300",
-    6 : "1400",
-    7 : "1500",
-    8 : "1600",
-    9 : "1700"
+    0: "0800",
+    1: "0900",
+    2: "1000",
+    3: "1100",
+    4: "1200",
+    5: "1300",
+    6: "1400",
+    7: "1500",
+    8: "1600",
+    9: "1700"
   };
   var monthConversions = {
-    "01" : 1,
-    "02" : 2,
-    "03" : 3,
-    "04" : 4,
-    "05" : 5,
-    "06" : 6,
-    "07" : 7,
-    "08" : 8,
-    "09" : 9,
-    "10" : 10,
-    "11" : 11,
-    "12" : 12
+    "01": 1,
+    "02": 2,
+    "03": 3,
+    "04": 4,
+    "05": 5,
+    "06": 6,
+    "07": 7,
+    "08": 8,
+    "09": 9,
+    "10": 10,
+    "11": 11,
+    "12": 12
   };
   var dateSplit = date.split("/");
   var month = parseInt(dateSplit[0]);
   var dayNum = parseInt(dateSplit[1]); //http://www.w3schools.com/jsref/jsref_parseint.asp
   var year = dateSplit[2];
   var monthName = monthNames[month];
-  
-  //Load the json file so we can see what timeslots are available
-  jQuery.ajax({
-        async: false,
-        dataType: "json",
-        url: "json/" + month + "_" + year + ".json",
-        success: function(data) {
-          availableDays = data;
-          console.log("Loading " + "json/" + month + "_" + year + ".json" + " Day : " + dayNum);
-        },
-        error: function(data) {
-          //http://stackoverflow.com/questions/6371857/how-to-call-a-specific-function-in-a-php-script-via-ajax
-          //Will create a json file for the current month
-          jQuery.ajax({
-            method : "post",
-            url : "writeJson.php",
-            data : "function=writeDefaultMonth&month=" + month +"&year="+year
-          });
-        }
-      });
 
   content += "<div class='ui-widget ui-calendar-day'>";
   //This is the div that contains all widget content
@@ -205,7 +103,7 @@ function buildDay(date) {
   for (var i = 8; i < 18; i++)
   {
     //Lets make sure the day is free before we make it clickable
-    if(availableDays[dayNum.toString()][timeStrings[i-8]] === "Empty")
+    if (availableDays[dayNum.toString()][timeStrings[i - 8]] === "Empty")
     {
       content += "<li class=\"timeListItem\" onmouseover=\"ChangeColor(this, true)\"";
       content += "onmouseout=\"ChangeColor(this, false)\"";
@@ -215,7 +113,7 @@ function buildDay(date) {
     {
       content += "<li class=\"timeListItem\"\>";
     }
-    
+
     //content += "<li class=\"timeListItem\" onmouseover=\"ChangeColor(this, true)\"";
 
     //Lets make the time in civilian format
@@ -274,65 +172,101 @@ function loadInfoForm(year, month, dayNum, time) {
 
 //This was particularly useful here:
 //http://stackoverflow.com/questions/677976/jquery-ui-datepicker-disable-specific-days
-function dayFree(date)
+function dayFree(fDate)
 {
-  var day = date.getDate();
-  var month = date.getMonth() + 1; //This will probably cause an off by one error at some point
-  var year = date.getFullYear();
+  var curDate = new Date();
+  var curD = curDate.getDate();
+  var curM = curDate.getMonth() + 1;
+  var curY = curDate.getFullYear();
+  var d = fDate.getDate();
+  var m = fDate.getMonth() + 1;
+  var y = fDate.getFullYear();
+  var td = tempDate.getDate();
+  var tm = tempDate.getMonth() + 1;
+  var ty = tempDate.getFullYear();
+  
   var free = false;
+
+  console.log("==================");
+  console.log("Inside dayFree");
+  console.log("==================");
+
+  console.log("Date Passed to Function: " + fDate);
+  console.log("Day : " + d);
+  console.log("Month: " + m);
+  console.log("Year: " + y);
+  console.log("====================================");
+  console.log("Current or Tempt Date: " + tempDate);
+  console.log("Day : " + td);
+  console.log("Month: " + tm);
+  console.log("Year: " + ty);
+
+/*  if (fDate < curDate) {
+    console.log("Date being checked is prior to current date");
+    return [false,
+      "",
+      "Cannot book appointments before " + curM + "/" + curD + "/" + curY];
+  }*/
+  
+  // Double check that the availableDays variable is defined!
+  if (typeof availableDays === 'undefined') {
+    console.log("=============================");
+    console.log("Available Days variable is undefined");
+    console.log("=============================");
+    availableDays = getJsonFile(y, m);
+  }
+
+  // jQuery datepicker showBeforeDay option behaves in a way that I do
+  // not understand and seems to check previous or next months first.
+  // If that is the case, we need to load the appropriate JSON file.
+  if ( (m !== tm) || (y !== ty)) {
+    console.log('fDate !== tempDate');
+    console.log('fDate:    ' + fDate);
+    console.log('tempDate: ' + tempDate);
+    tempDate = fDate;
+    console.log('new tempDate: ' + tempDate);
+    availableDays = getJsonFile(y, m);
+  }
+
   var timeStrings = {
-    0 : "0800",
-    1 : "0900",
-    2 : "1000",
-    3 : "1100",
-    4 : "1200",
-    5 : "1300",
-    6 : "1400",
-    7 : "1500",
-    8 : "1600",
-    9 : "1700"
+    0: "0800",
+    1: "0900",
+    2: "1000",
+    3: "1100",
+    4: "1200",
+    5: "1300",
+    6: "1400",
+    7: "1500",
+    8: "1600",
+    9: "1700"
   };
+
+  //Loop through the time entries int he JSON file and make sure atleast
+  //one timeslot says Empty, otherwise the day is booked
+  for (var i = 0; i <= 9; i++)
+  {
+    console.log("dayFree LOOP: " + availableDays[d][timeStrings[i]]);
+    if (availableDays[d][timeStrings[i]] === "Empty")
+    {
+      console.log("Setting free to true for " + m + "/" + d);
+      free = true;
+      break;
+    }
+  }
+  if (free === false)
+  {
+    console.log("month: " + m + " Day: " + d + " is booked");
+    return [false, "", "Day booked"]; //Day can't be booked
+  }
+  else
+  {
+    console.log("month: " + m + " Day: " + d + " is free");
+    return [true, "", "Available appointment times"]; //Day can still be booked
+  }
   
-  console.log("Opening " + month + "_" + year + ".json");
-  
-  jQuery.ajax({
-        async: false,
-        dataType: "json",
-        url: "json/" + month + "_" + year + ".json",
-        success: function(data) {
-          availableDays = data;
-          //console.log("Loading " + "json/" + month + "_" + year + ".json" + " Day : " + day);
-        },
-        error: function(data) {
-          //http://stackoverflow.com/questions/6371857/how-to-call-a-specific-function-in-a-php-script-via-ajax
-          //Will create a json file for the current month
-          console.log("Error encountered opening file month: " + month + " year: " + year);
-          jQuery.ajax({
-            method : "post",
-            url : "writeJson.php",
-            data : "function=writeDefaultMonth&month=" + month +"&year="+year
-          });
-        }
-      });
-      
-      //Loop through the time entries int he JSON file and make sure atleast
-      //one timeslot says Empty, otherwise the day is booked
-      for(var i = 0; i <= 9; i++)
-      {
-        if(availableDays[day][timeStrings[i]] === "Empty")
-        {
-          free = true;
-        }
-      }
-      if(free === false)
-      {
-        //console.log("month: " + date.getMonth() + " Day: " + day + " is booked" );
-        return {0 : false, 2: "Day booked"}; //Day can't be booked
-      }
-      else
-      {
-        return {0 : true, 2: "Available appointment times"}; //Day can still be booked
-      }
+  console.log("==========================");
+  console.log("Exit dayFree funciton");
+  console.log("==========================");
 }
 
 //This function is used to highlight the day that the user is trying
@@ -358,3 +292,118 @@ function ChangeColor(tableRow, highLight)
     tableRow.style.backgroundColor = tableBackgroundColor;
   }
 }
+
+// Initiates the AJAX call to grab the JSON file from the server.
+// Takes the year and month and finds the file named based on
+// those values. It will create the file if it does not exist.
+// 
+// Inputs  : y - Year, m - Month
+// Returns : A JSON object containing the data from the requested JSON file.
+function getJsonFile(y, m)
+{
+  var jsonData;
+  console.log("===============================");
+  console.log("In getJsonFile : Y=" + y + " M="+ m);
+  console.log("===============================");
+
+  jQuery.ajax({
+    async: false,
+    dataType: "json",
+    url: "json/" + m + "_" + y + ".json",
+    success: function(data) {
+      jsonData = data;
+      console.log("Loading " + "json/" + m + "_" + y + ".json");
+    },
+    error: function(data) {
+      //http://stackoverflow.com/questions/6371857/how-to-call-a-specific-function-in-a-php-script-via-ajax
+      //Will create a json file for the current month
+      console.log("Error encountered opening file month: " + m + " year: " + y);
+      jQuery.ajax({
+        async: false,
+        method: "post",
+        url: "writeJson.php",
+        data: "function=writeDefaultMonth&month=" + m + "&year=" + y,
+        success: function() {
+          console.log("RECURSIVE CALL TO getJsonFile");
+          // Now that the file exists, we can attempt to return the data.
+          jsonData = getJsonFile(y, m);
+        }
+      });
+    }
+  });
+  
+  console.log("==================================");
+  console.log("Exit getjsonFile");
+  console.log("==================================");
+  return jsonData;
+}
+
+// Once the document is ready, we can place the content.
+jQuery(document).ready(function() {
+
+  // Setting properties to Log In button 
+  $("#loginButton").button({
+    label: "Log In", // give label to login button 
+    icons: {
+      primary: "ui-icon-person" // person icon 
+    }
+  });
+
+  $("#registerButton").button({
+    label: "Register",
+    icons: {
+      primary: "ui-icon-pencil"
+    }
+  });
+  // Setting properties to employee Log In button
+  $("#nav1").button({
+    icons: {
+      primary: "ui-icon-person"
+    }
+  });
+
+  // Setting property to Home button
+  $("#nav2").button({
+    icons: {
+      primary: "ui-icon-home"
+    }
+  });
+
+  //courtesy of http://stackoverflow.com/questions/887696/jquery-datepicker-onselect-wont-work
+  $(function() {
+    //var date = new Date();
+
+    $("#calendarDiv").datepicker({
+      //setDate: date,
+      onSelect: function(date) {
+        console.log("============================");
+        console.log("datePicker.onSelect");
+        console.log("============================");
+        console.log("Date: " + date);
+        buildDay(date);
+      },
+      //Courtesy of:
+      //http://forum.jquery.com/topic/making-past-dates-unselectable-unclickable
+      minDate: 0,
+      beforeShowDay: function(date) {
+        console.log("============================");
+        console.log("datePicker.beforeShowDay");
+        console.log("============================");
+        console.log("Date: " + date);
+        dayFree(date);
+      }/*,
+       onChangeMonthYear: function(y, m){
+       console.log("============================");
+       console.log("datePicker.onChangeMonthYear");
+       console.log("============================");        
+       console.log("Year: " + y + "; Month: " + m);
+       availableDays = getJsonFile( y, m );
+       }*/
+    }
+    //{
+    // changeMonth: true,
+    // changeYear: true
+    //}
+    );
+  });
+});

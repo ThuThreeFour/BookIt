@@ -9,6 +9,11 @@
  * Created on 02-22-2014 CJC
  */
 
+$('#inputForm').keypress(function(event){
+  if( event.keyCode === 10 || event.keyCode === 13 )
+    event.preventDefault();
+});
+
 function validateForm(){
   // Changes to the validator options are based on the documentation
   // found here: http://jqueryvalidation.org/validate#toptions
