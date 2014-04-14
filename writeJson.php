@@ -17,15 +17,59 @@ and open the template in the editor.
 <?php
 addToLog("In writeJson.php\n");
 
-if(isset($_POST['function'])) {
-  if ($_POST['function'] == "writeDefaultMonth") {
+if (isset($_POST['function'])) {
+  if ($_POST['function'] === "writeDefaultMonth") {
     addToLog("function called: writeDefaultMonth month: " . $_POST['month'] . " year: " . $_POST['year'] . "\n");
-    writeDefaultMonth($_POST['month'], $_POST['year']);
-  }
+    writeDefaultMonth($_POST['month'], $_POST['year'], $_POST['function']);
+  } 
+} else {
+  addToLog("not calling writeDefaultMonth");
+  reserveAppointment();
 }
 
-addToLog("not calling writeDefaultMonth");
-reserveAppointment();
+function addToJSON($file, $d, $t, $n, $p, $e, $f){
+  // Called by reserveAppointment
+  addToLog("In addToJSON function");
+  if ( $f === null ){
+    //To avoid a fatal error
+    //http://stackoverflow.com/questions/6815520/cannot-use-object-of-type-stdclass-as-array
+    //This will decode existing JSON files to be edited
+    $json = json_decode(file_get_contents("json/$file"), true);
+    addToLog("json_decode of $file resulted in:\n " . json_encode($json) . "\n");
+
+    addToLog("json[$d][$t] before change: " . $json[$d][$t]);
+    //Store the person's name in the JSON file to reserve the appointment
+    $json[$d][$t] = array("name" => $n, "phoneNum" => $p, "email" => $e);
+    addToLog("json[$d][$t] after change: Name: " . $json[$d][$t]["name"] . 
+                               " Phone Number: " . $json[$d][$t]["phoneNum"] . 
+                                    " Email: "   . $json[$d][$t]["email"]);
+    
+    //Rewrite changes to disk
+    //Pretty printing from: http://stackoverflow.com/questions/7097374/php-pretty-print-json-encode
+    //Due to file permissions on weblab, we have to create the file in /tmp
+    //and move it to the json folder
+    addToLog("saving $file to /tmp/$file with contents:\n" . json_encode($json));
+    file_put_contents("/tmp/$file", json_encode($json));
+    addToLog("Moving file /tmp/$file to json/$file");
+    exec("mv /tmp/$file json/");
+  } else {
+    // Called by writeDefaultMonth
+    // Do same as above, but with a slight change
+    $json = json_decode(file_get_contents("json/$file"), true);
+    addToLog("json_decode of $file resulted in:\n $json");
+
+    addToLog("json[$d][$t] before change: " . $json[$d][$t]);
+    
+    // This is a hack. For some reason, the JSON file format is incorrect when it is empty, so populating
+    // the 0 day with placeholders. Because there is not 0th of any month (we start our months at 1),
+    // we can populate this day with the placeholder.
+    $json[$d][$t] = array("name" => "Place Holder", "phoneNum" => "Place Holder", "email" => "Place Holder");
+    addToLog("json[$d][$t] after change: " . $json[$d][$t]);
+    file_put_contents("/tmp/$file", json_encode($json));
+    addToLog("mv from /tmp/$file to json/$file");
+    exec("mv /tmp/$file json/");
+  }
+}
 
 function reserveAppointment() {
   //Grab all of the appointment info from $_POST superglobal
@@ -45,26 +89,10 @@ function reserveAppointment() {
   addToLog("Looking for file: $file");
   //If the file we want to write to doesn't exist, we should probably create it
   if (file_exists("json/$file")) {
-    addToLog("json/$file exists");
-    //To avoid a fatal error
-    //http://stackoverflow.com/questions/6815520/cannot-use-object-of-type-stdclass-as-array
-    //This will decode existing JSON files to be edited
-    $json = json_decode(file_get_contents("json/$file"), true);
-    addToLog("json_decode of $file resulted in:\n " . json_encode($json) . "\n");
-
-    addToLog("json[$day][$time] before change: " . $json[$day][$time]);
-    //Store the person's name in the JSON file to reserve the appointment
-    $json[$day][$time] = array("name" => $name, "phoneNum" => $phone, "email" => $email);
-    addToLog("json[$day][$time] after change: Name: " . $json[$day][$time]["name"] . " Phone Number: " . $json[$day][$time]["phoneNum"] . " Email: " . $json[$day][$time]["email"]);
     
-    //Rewrite changes to disk
-    //Pretty printing from: http://stackoverflow.com/questions/7097374/php-pretty-print-json-encode
-    //Due to file permissions on weblab, we have to create the file in /tmp
-    //and move it to the json folder
-    addToLog("saving $file to /tmp/$file with contents:\n" . json_encode($json));
-    file_put_contents("/tmp/$file", json_encode($json));
-    addToLog("Moving file /tmp/$file to json/$file");
-    exec("mv /tmp/$file json/");
+    addToLog("json/$file exists");
+    addToJSON($file, $day, $time, $name, $phone, $email, null);
+    
   } else {
     addToLog("File doesn't exist");
     //The month file doesn't exist, lets create it
@@ -77,17 +105,7 @@ function reserveAppointment() {
     exec("mv /tmp/$file json/");
     
     //Do the same thing as up above
-    
-    $json = json_decode(file_get_contents("json/$file"), true);
-    addToLog("json_decode of $file resulted in:\n $json");
-
-    addToLog("json[$day][$time] before change: " . $json[$day][$time]);
-    //Store the person's name in the JSON file to reserve the appointment
-    $json[$day][$time] = array("name" => $name, "phoneNum" => $phone, "email" => $email);
-    addToLog("json[$day][$time] after change: " . $json[$day][$time]);
-    file_put_contents("/tmp/$file", json_encode($json));
-    addToLog("mv from /tmp/$file to json/$file");
-    exec("mv /tmp/$file json/");
+    addToJSON($file, $day, $time, $name, $phone, $email, null);
   }
 
   //Since we are done lets go home
@@ -113,7 +131,7 @@ function buildDefaultMonth() {
   return $json;
 }
 
-function writeDefaultMonth($month, $year) {
+function writeDefaultMonth($month, $year, $f) {
   $file = "$month" . "_" . "$year.json";
   
   addToLog("In function writeDefaultMonth()");
@@ -123,6 +141,10 @@ function writeDefaultMonth($month, $year) {
   file_put_contents("/tmp/$file", json_encode(buildDefaultMonth()));
   addToLog("mv from /tmp/$file to json/$file");
   exec("mv /tmp/$file json");
+  exec("mv /tmp/log.out json");
+  sleep(5);
+  // Use our hack to properly format the JSON file.
+  addToJSON($file, null, null, null, null, null, $f);
   return;
   //header('Location: home.html');
 }
