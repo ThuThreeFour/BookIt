@@ -21,13 +21,13 @@ var currDay = date.getDate();
 var currMonth = date.getMonth() + 1; //This will probably cause an off by one error at some point
 var currYear = date.getFullYear();
 
-console.log("=================");
-console.log("INITIAL PAGE LOAD");
-console.log("=================");
+//console.log("=================");
+//console.log("INITIAL PAGE LOAD");
+//console.log("=================");
 
-console.log("Day : " + currDay);
-console.log("Month: " + currMonth);
-console.log("Year: " + currYear);
+//console.log("Day : " + currDay);
+//console.log("Month: " + currMonth);
+//console.log("Year: " + currYear);
 
 //Load the json file so we can see what timeslots are available
 availableDays = getJsonFile(currYear, currMonth);
@@ -100,6 +100,7 @@ function buildDay(date) {
   //https://forums.digitalpoint.com/threads/html-checkbox-onclick-submit.1271195/
   content += "<ul class=\"timeList\">"; //onclick=\"this.form.submit();\">";
   //This loop will create a list item for every hour of the day between 0800-1700
+  availableDays = getJsonFile( year, month );
   for (var i = 8; i < 18; i++)
   {
     //Lets make sure the day is free before we make it clickable
@@ -187,32 +188,32 @@ function dayFree(fDate)
   
   var free = false;
 
-  console.log("==================");
-  console.log("Inside dayFree");
-  console.log("==================");
+  //console.log("==================");
+  //console.log("Inside dayFree");
+  //console.log("==================");
 
-  console.log("Date Passed to Function: " + fDate);
-  console.log("Day : " + d);
-  console.log("Month: " + m);
-  console.log("Year: " + y);
-  console.log("====================================");
-  console.log("Current or Tempt Date: " + tempDate);
-  console.log("Day : " + td);
-  console.log("Month: " + tm);
-  console.log("Year: " + ty);
+  //console.log("Date Passed to Function: " + fDate);
+  //console.log("Day : " + d);
+  //console.log("Month: " + m);
+  //console.log("Year: " + y);
+  //console.log("====================================");
+  //console.log("Current or Tempt Date: " + tempDate);
+  //console.log("Day : " + td);
+  //console.log("Month: " + tm);
+  //console.log("Year: " + ty);
 
-/*  if (fDate < curDate) {
-    console.log("Date being checked is prior to current date");
+  if (fDate < curDate) {
+    //console.log("Date being checked is prior to current date");
     return [false,
       "",
       "Cannot book appointments before " + curM + "/" + curD + "/" + curY];
-  }*/
+  }
   
   // Double check that the availableDays variable is defined!
   if (typeof availableDays === 'undefined') {
-    console.log("=============================");
-    console.log("Available Days variable is undefined");
-    console.log("=============================");
+    //console.log("=============================");
+    //console.log("Available Days variable is undefined");
+    //console.log("=============================");
     availableDays = getJsonFile(y, m);
   }
 
@@ -220,11 +221,11 @@ function dayFree(fDate)
   // not understand and seems to check previous or next months first.
   // If that is the case, we need to load the appropriate JSON file.
   if ( (m !== tm) || (y !== ty)) {
-    console.log('fDate !== tempDate');
-    console.log('fDate:    ' + fDate);
-    console.log('tempDate: ' + tempDate);
+    //console.log('fDate !== tempDate');
+    //console.log('fDate:    ' + fDate);
+    //console.log('tempDate: ' + tempDate);
     tempDate = fDate;
-    console.log('new tempDate: ' + tempDate);
+    //console.log('new tempDate: ' + tempDate);
     availableDays = getJsonFile(y, m);
   }
 
@@ -245,28 +246,28 @@ function dayFree(fDate)
   //one timeslot says Empty, otherwise the day is booked
   for (var i = 0; i <= 9; i++)
   {
-    console.log("dayFree LOOP: " + availableDays[d][timeStrings[i]]);
+    //console.log("dayFree LOOP: " + availableDays[d][timeStrings[i]]);
     if (availableDays[d][timeStrings[i]] === "Empty")
     {
-      console.log("Setting free to true for " + m + "/" + d);
+      //console.log("Setting free to true for " + m + "/" + d);
       free = true;
       break;
     }
   }
   if (free === false)
   {
-    console.log("month: " + m + " Day: " + d + " is booked");
+    //console.log("month: " + m + " Day: " + d + " is booked");
     return [false, "", "Day booked"]; //Day can't be booked
   }
   else
   {
-    console.log("month: " + m + " Day: " + d + " is free");
+    //console.log("month: " + m + " Day: " + d + " is free");
     return [true, "", "Available appointment times"]; //Day can still be booked
   }
   
-  console.log("==========================");
-  console.log("Exit dayFree funciton");
-  console.log("==========================");
+  //console.log("==========================");
+  //console.log("Exit dayFree funciton");
+  //console.log("==========================");
 }
 
 //This function is used to highlight the day that the user is trying
@@ -302,9 +303,9 @@ function ChangeColor(tableRow, highLight)
 function getJsonFile(y, m)
 {
   var jsonData;
-  console.log("===============================");
-  console.log("In getJsonFile : Y=" + y + " M="+ m);
-  console.log("===============================");
+  //console.log("===============================");
+  //console.log("In getJsonFile : Y=" + y + " M="+ m);
+  //console.log("===============================");
 
   jQuery.ajax({
     async: false,
@@ -312,29 +313,28 @@ function getJsonFile(y, m)
     url: "json/" + m + "_" + y + ".json",
     success: function(data) {
       jsonData = data;
-      console.log("Loading " + "json/" + m + "_" + y + ".json");
+      //console.log("Loading " + "json/" + m + "_" + y + ".json");
     },
     error: function(data) {
       //http://stackoverflow.com/questions/6371857/how-to-call-a-specific-function-in-a-php-script-via-ajax
       //Will create a json file for the current month
-      console.log("Error encountered opening file month: " + m + " year: " + y);
+      //console.log("Error encountered opening file month: " + m + " year: " + y);
       jQuery.ajax({
         async: false,
         method: "post",
         url: "writeJson.php",
         data: "function=writeDefaultMonth&month=" + m + "&year=" + y,
         success: function() {
-          console.log("RECURSIVE CALL TO getJsonFile");
+          //console.log("RECURSIVE CALL TO getJsonFile");
           // Now that the file exists, we can attempt to return the data.
           jsonData = getJsonFile(y, m);
         }
       });
     }
   });
-  
-  console.log("==================================");
-  console.log("Exit getjsonFile");
-  console.log("==================================");
+  //console.log("==================================");
+  //console.log("Exit getjsonFile");
+  //console.log("==================================");
   return jsonData;
 }
 
@@ -375,30 +375,18 @@ jQuery(document).ready(function() {
 
     $("#calendarDiv").datepicker({
       //setDate: date,
-      onSelect: function(date) {
-        console.log("============================");
-        console.log("datePicker.onSelect");
-        console.log("============================");
-        console.log("Date: " + date);
+      onSelect: buildDay,
+      /*onSelect: function(date) {
+        //console.log("============================");
+        //console.log("datePicker.onSelect");
+        //console.log("============================");
+        //console.log("Date: " + date);
         buildDay(date);
-      },
+      },*/
       //Courtesy of:
       //http://forum.jquery.com/topic/making-past-dates-unselectable-unclickable
       minDate: 0,
-      beforeShowDay: function(date) {
-        console.log("============================");
-        console.log("datePicker.beforeShowDay");
-        console.log("============================");
-        console.log("Date: " + date);
-        dayFree(date);
-      }/*,
-       onChangeMonthYear: function(y, m){
-       console.log("============================");
-       console.log("datePicker.onChangeMonthYear");
-       console.log("============================");        
-       console.log("Year: " + y + "; Month: " + m);
-       availableDays = getJsonFile( y, m );
-       }*/
+      beforeShowDay: dayFree
     }
     //{
     // changeMonth: true,
