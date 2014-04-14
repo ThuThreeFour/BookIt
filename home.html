@@ -31,24 +31,8 @@
 
     <!-- The lines below is to link the css to this page. -->
     <link rel="stylesheet" type="text/css" href="css/cupertino/jquery-ui-1.10.4.custom.min.css">
+    <link rel="stylesheet" type="text/css" href="css/calendar.css">
     <link rel="stylesheet" type="text/css" href="css/homeCSS.css">
-    <script type="text/javascript">
-      jQuery( document ).ready( function(){
-        
-        validateUserLogin();
-
-  
-        getURL();
-      
-        //Found how to do this here:
-        //http://stackoverflow.com/questions/16219247/how-to-suppress-jquery-validation-submithandler-when-cancel-button-is-clicked
-        //$( "#cancel" ).click( function(e){
-          //e.preventDefault();
-          //window.location = "home.html";
-        //} );
-      } ); // end ready
-    </script>
-    
 
   </head>
   <body>
@@ -111,17 +95,20 @@
     <div id="regstDialog"></div> 
     
     <div id="calendarDiv" style="display: none"></div>
+    <div class="daySelector"></div>
 
     <!-- footer -->
+    <!-- Removing dead buttons for beta
     <div id="footer">
       <ul class="nav">
         <li class="empLoginButton">
-          Employee Login <!-- Will be implemented if there is time. -->
+          Employee Login <!-- Will be implemented if there is time.
         </li>
         <li class="homePageButton">
           <a href="home.html">Home</a>
         </li>
       </ul>
     </div>
+    -->
   </body>
 </html>
