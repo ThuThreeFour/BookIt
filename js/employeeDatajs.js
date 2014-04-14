@@ -206,7 +206,7 @@ function dayFree(fDate)
     //console.log("Date being checked is prior to current date");
     return [false,
       "",
-      "Cannot book appointments before " + curM + "/" + curD + "/" + curY];
+      "Cannot book appointments before " + curM + "/" + (curD + 1) + "/" + curY];
   }
   
   // Double check that the availableDays variable is defined!
