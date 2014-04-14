@@ -63,19 +63,26 @@ function placeEmployeeData() {
 jQuery(document).ready(function() {
 
   // Setting properties to Log In button 
-  $("#loginButton").button({
-    label: "Log In", // give label to login button 
+  $(".loginButton").button({
+    //label: "Log In", // give label to login button 
     icons: {
       primary: "ui-icon-person" // person icon 
     }
   });
+  
+  $(".logoutButton").button({
+    icons: {
+     primary: "ui-icon-unlocked" 
+    }
+  });
 
-  $("#registerButton").button({
-    label: "Register",
+  $(".registerButton").button({
     icons: {
      primary: "ui-icon-pencil" 
     }
   });
+  
+  
   
   // validating username and password
   $("#usrLoginForm").validate({
@@ -100,14 +107,14 @@ jQuery(document).ready(function() {
   
   
   // Setting properties to employee Log In button
-  $("#nav1").button({
+  $(".empLoginButton").button({
     icons: {
       primary: "ui-icon-person"
     }
   });
 
   // Setting property to Home button
-  $("#nav2").button({
+  $(".homePageButton").button({
     icons: {
       primary: "ui-icon-home"
     }

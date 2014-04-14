@@ -12,6 +12,8 @@
  */
 
       var userLoginInfo;
+      var sessionName;
+      var sessionID;
 
       // The ajax call allows for synchronous loading, which is needed
       // here so that the JSON file can be completely loaded before
@@ -27,26 +29,10 @@
       });
 
 function validateRegistrationForm(){
-  /* // validate if email already associate with known account
-  var email = getParameter("email");
-  //var email = "t@gmail.com";
-  if(email === null ){
-    console.log("email is null");
-  } else{
-  for(var count = 0; count < userLoginInfo.length; count++){
-    if(email === userLoginInfo[count].email){
-      console.log(userLoginInfo[count].email);
-      $(this).html("This email already exists");
-      //$('input[name=email]').attr('disabled', true);
-      break;
-      //console.log("email is found");
-    } 
-    else {
-      $(this).html("This email already exists");
-      $('input[name=email]').attr('disabled', false);
-    }
-  } 
-  }*/
+  
+  //console.log("inside registration validate");
+
+  // prevent form submisssion when return key is striked
   $('#registrationform').keypress(function(event){
     if(event.keyCode === 10 || event.keyCode === 13) event.preventDefault();
   });
@@ -88,15 +74,16 @@ function validateRegistrationForm(){
         required: true
       },
       password: {
-        minlength: 8,
+        minlength: 4,
         maxlength: 16,
         required: true
       },
       confirmPassword: {
         // range rule will not properly validate
-        minlength: 8,
+        minlength: 4,
         maxlength: 16,
-        equalTo: "#password"
+        equalTo: "#password",
+        required: true
       },
       phoneNum: {
         required: true,
@@ -120,14 +107,15 @@ function validateRegistrationForm(){
         required: "Please provide an email address"
       },
       password:{ 
-        minlength: "length too short",
-        maxlength: "length too long",
+        minlength: "Password must be atleast 4 characters",
+        maxlength: "Password can not be more than 16 characters",
         required: "Please provide a password"
       },
       confirmPassword: {
-        minlength: "length too short",
-        maxlength: "length too long",
-        equalTo: "Password does not match"
+        minlength: "Password must be atleast 4 characters",
+        maxlength: "Password can not be more than 16 characters",
+        equalTo: "Password does not match",
+        required: "Please provide a password"
       },
       phoneNum: {
         required: "Please enter a phone number",
@@ -155,3 +143,161 @@ function validateRegistrationForm(){
   } ); // end validate
 }
 
+
+// validate username and password feild on home.html
+function validateUserLogin(){
+  console.log("inside user login validate");
+  
+  $.validator.addMethod("exist", 
+    function(value){
+      var userEmail;
+      //flag = true;
+      flag = false;
+      console.log(value);
+      for(var count = 0; count < userLoginInfo.length; count++){
+        //console.log(userLoginInfo.length);
+        if(value === userLoginInfo[count].email){
+          console.log( "Value: " + value + "; Email Entered: " + userLoginInfo[count].email );
+          //flag = false;
+          userEmail = value;
+          //console.log("userEmail = " + userEmail);
+          var pw = $("#password").val();
+          
+          sessionName = userLoginInfo[count]["fname"];
+          console.log("first name = " + sessionName);
+          
+          if( (pw.length !== 0) && (pw === userLoginInfo[count].password)) {
+            //sessionName = userLoginInfo[count].fname;
+            //console.log(sessionName);
+            sessionID = userLoginInfo[count].fname;
+            flag = true;
+            break;
+          }
+          console.log("length ==" + $("#password").val().length);
+          return (flag = false);
+          break;
+        }
+      }
+      return flag;
+  });
+  
+  $("#loginForm").validate({
+    rules: {
+      username: {
+        exist: true,
+        required: true
+      },
+      password: {
+        required: true      
+      }
+    },
+    messages: {
+      username: {
+        exist: "Email or password in incorrect",
+        required: "Please provide an email address"
+      },
+      password: {
+        required: "Please provide a password"
+      }
+  }
+  });
+  
+  
+} // end validateUserLogin
+
+
+// get the url
+function getURL(){
+  var status = false;
+  var href = window.location.search;
+  console.log(href);
+  
+  var regstSuccess = "?register=true"; // account successfully created
+  var regstfail = "?register=false"; // account unsuccessfully created
+  
+  var loginSuccess = "?session=true";
+  
+  if(href === regstSuccess) {
+    //console.log("success");
+    status = true;
+    displayDialog(status);
+    return;
+  }
+  
+  if(href === regstfail){
+    //console.log("fail");
+    displayDialog(status);
+    return;
+  }
+  
+  if(href === loginSuccess){
+    loginSession();
+  }
+}
+
+function loginSession(){
+  console.log("disable form");
+  document.getElementById('login').style.display = "none";
+  //document.getElementById('wrapper').style.display = "none";
+  
+  var msg = "logged in as " + sessionName;
+  $("#sessionMsg").html(msg);
+  
+  $("li.registerButton").removeClass("registerButton").addClass("logoutButton");
+  document.getElementById('sessionLink').href = "home.html";
+   
+  var content = "Log out";
+  $("#sessionLabel").html(content);
+  
+  
+  
+  /*
+  content += "<div id='red'>"; 
+  content += "<ul>";
+  content += "<li class='formMsg'><p><i>logged in as </i></li>";
+  content += "<li id='logoutButton'>";           
+  content += "<a href='home.html'>Log out</a>";             
+  content += "</li></ul></div>";  
+  //content += "<button class='logoutButton' onlclick='window.open(\"home.html\",_self);'>click mes</button>";
+  
+  //content += "</div>"; */
+                 
+  
+}
+
+
+
+ // Dialog box to let user know status of account registation.
+function displayDialog(status){
+  var content = "";
+  
+  if(status === true){
+    content += "<p>Thank you for registering, your acccount was successfully created.</p>";
+  }
+  else {
+    content += "<p>There was an error creating the account. Please try again.</p>";
+  }
+  
+  content += "</div></div>";
+  
+  //The following is from:
+  //https://jqueryui.com/dialog/#default
+  $("#regstDialog").html(content);
+
+  //Using a dialog will pop up the day view in a dialog box.
+  //Setting the min height and width found here:
+  //http://api.jqueryui.com/dialog/#option-minHeight
+  //Setting the UI effects for open/close here:
+  //http://api.jqueryui.com/category/effects/
+  //http://api.jqueryui.com/dialog/#option-hide
+  $("#regstDialog").dialog({minWidth: 200, minHeight: 200,
+    show: {
+      effect: "fade",
+      duration: 500
+    },
+    hide: {
+      effect: "fade",
+      duration: 500
+    }});
+ 
+}

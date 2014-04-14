@@ -1,17 +1,1 @@
-[
-    {
-        "fname": "thu",
-        "password": "1",
-        "lname": "tran",
-        "email": "four@gmail.com",
-        "phoneNum": "9787777777"
-    },
-    {
-        "fname": "thj",
-        "password": "12345678",
-        "lname": "jhjk",
-        "email": "t65@u.c",
-        "phoneNum": "9785555555",
-        "sessionId": "d49ea5e10f4436b036b7c8b7c0d747ad"
-    }
-]
+[{"fname":"test","password":"12345678","lname":"test","email":"test@test.com","phoneNum":"9785555555","sessionId":"e1eae7d673057755cfe5eb349dc3cca3"},{"password":"1234","fname":"thu","lname":"tran","email":"thu.tran10@yahoo.com","phoneNum":"9785555555","sessionId":"1d18eb151bfbdc8cfa363af2202d5416"}]
