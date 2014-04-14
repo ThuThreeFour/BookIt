@@ -8,14 +8,14 @@
       Author: Thu Tran, Chris Compton, UMass Lowell CompSci Student
       Course: GUI Programming 2
       Email: thu_tran2@student.uml.edu, christopher.j.compton@gmail.com
-      Description: This page is the home page to Book-It project. 
+      Description: This page is the home page to Book-It project.
       Updated: February 22, 2014
       (Documentation is a modification of Professor Jesse Heines's work.)
     -->
 
     <title>Book-It Home</title>
 
-    <!-- Load jQuery library from the Google content Delivery Network (CDN)see 
+    <!-- Load jQuery library from the Google content Delivery Network (CDN)see
     http://encosia.com/3-reasons-why-you-should-let-google-host-jquery-for-you/
     jQuery can also be downloaded and stored locally from http://jquery.com/download/-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
@@ -25,36 +25,53 @@
     <script src="js/employeeDatajs.js" type="text/javascript"></script>
     <script src="js/angular/controllers.js" type="text/javascript"></script>
     <script src="js/jquery-validate/jquery.validate.min.js"></script>
-    
+    <script src="js/validateRegistrationForm.js"></script>
+
     <!-- script src="js/make-calendar.js"></script -->
-    
+
     <!-- The lines below is to link the css to this page. -->
     <link rel="stylesheet" type="text/css" href="css/cupertino/jquery-ui-1.10.4.custom.min.css">
     <link rel="stylesheet" type="text/css" href="css/calendar.css">
     <link rel="stylesheet" type="text/css" href="css/homeCSS.css">
-    
 
   </head>
   <body>
     <div id="header">
       <div id="image">
-        <img src="images/BookItBanner.png" alt="">
+        <a href="home.html"><img src="images/BookItBanner.png" alt="Book-it"></a>
       </div>
 
       <div id="loginRegister">
-        <form id="usrLoginForm" method="POST">
-          <input type="text" placeholder="Username">
-          <input type="text" placeholder="Password">
-          <!-- Customer log in button - will not implement this until Beta version.  -->
-          <a class="userButton" href="home.html" id="loginButton"></a>
-          <a class="userButton" href="home.html" id="registerButton"></a>
+        <form id="loginForm" action="login.php" method="post">
+          <div id="login">
+            <div id="wrapper">
+              <input type="text" placeholder="email" id="username" name="username">
+            </div>
+            <div id="wrapper">
+              <input type="password" placeholder="Password" id="password" name="password">
+            </div>
+            <button class="loginButton" type="submit">Log In</button>
+          </div>
+          <div id="signUp">
+            <ul class="nav">
+              <li class="formMsg"><span id="sessionMsg"><i>Do not have an account with us?</i></span></li>
+              <li class="registerButton">
+                <!--a class="userButton" href="home.html" id="registerButton"></a-->
+                <a id="sessionLink" href="registrationForm.html">
+                  <span id="sessionLabel">Create New Account</span>
+                </a>
+              </li> 
+          </ul>
+          </div>
+          
         </form>
       </div>
+      
 
       <div id="msgTousr">
         <div class="ui-state-highlight ui-corner-all" >
           <div  class="ui-icon ui-icon-info"></div>
-          <p id="msg">Below are our professional staff. Click on the picture of your 
+          <p id="msg">Below are our professional staff. Click on the picture of your
             preferred specialist to book an appointment with them. </p>
         </div>
       </div>
@@ -73,7 +90,10 @@
         </ul>
       </div>
     </div>
-
+    
+    <!-- Dialog box to confirm to user status of account registration. -->
+    <div id="regstDialog"></div> 
+    
     <div id="calendarDiv" style="display: none"></div>
     <div class="daySelector"></div>
 
@@ -81,10 +101,10 @@
     <!-- Removing dead buttons for beta
     <div id="footer">
       <ul class="nav">
-        <li id="nav1">
-          Employee Login
+        <li class="empLoginButton">
+          Employee Login <!-- Will be implemented if there is time.
         </li>
-        <li id="nav2">
+        <li class="homePageButton">
           <a href="home.html">Home</a>
         </li>
       </ul>
