@@ -121,8 +121,12 @@ p#msg {
   float: left;
 }
 
+/*Upon successful appointment reservation, this dialog is shown*/
+#reservationDialog {
+  display: none;
+}
 
-
+/*Upon successful user creation, this dialog is shown*/
 #regstDialog {
   display: none;
 }

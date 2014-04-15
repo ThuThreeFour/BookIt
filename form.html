@@ -99,29 +99,6 @@
       }
 
     </script>
-    <script>
-      function alertUserOfSuccess() {
-        var content = "";
-        console.log("Inside function alertUserOfSuccess()");
-        alert("YO DAWG IN HERE");
-        //Lets popup a dialog that says the form submitted successfully
-        content += "<span>";
-        content += "Form submitted successfully!";
-        content += "</span>";
-        //Show our span in a dialog
-        jQuery(".successDialog").html(content);
-        jQuery(".successDialog").dialog({minWidth: 500, minHeight: 500,
-          show: {
-            effect: "slide",
-            duration: 500
-          },
-          hide: {
-            effect: "slide",
-            duration: 500
-          }});
-        return 0;
-      }
-    </script>
   </head>
   <body>
     <div class="ui-widget ui-form">
@@ -129,7 +106,7 @@
         <div class="ui-widget-header ui-corner-all">
           <h2>Appointment Form</h2>
         </div>
-        <form id="inputForm" action="#" class="ui-helper-clearfix" onsubmit="return alertUserOfSuccess();">
+        <form id="inputForm" action="#" class="ui-helper-clearfix">
           <div class="inputField">
             <label for="date" class="formLabel">Date</label>
             <div class="ui-corner-all">
@@ -172,7 +149,6 @@
           </div>
           <!-- Cancel button gets class cancel so the validator will ignore it -->
           <button class="cancel" id="cancel" name="cancel">Cancel</button>
-          <!-- http://stackoverflow.com/questions/1438722/thank-you-alert-upon-form-submission-->
           <button type="submit" formaction="writeJson.php" formmethod="POST" id="submit" name="submit">Submit</button>
         </form>
       </div>
@@ -180,8 +156,6 @@
         <div class="ui-widget-header ui-corner-all">
           <h3 id="countdown">2:00</h3>
         </div>
-      </div>
-      <div class="successDialog">
       </div>
     </div>
   </body>
