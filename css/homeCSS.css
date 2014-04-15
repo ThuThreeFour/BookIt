@@ -31,14 +31,56 @@ body{
 #loginRegister
 {
   position: absolute;
-  top: 70px;
-  right: 30px;
+  top: 10px;
+  right: 0px;
 }
-/* over ride j*/
+
+#login, #signUp{
+  display: inline-block;
+}
+
+#red{background: red; width: 200px;height: 200px}
+
+#login {
+  border-right: #888 solid 1px;
+  padding: 2px;
+}
+
+
+#username, #password{
+  width: 162px;
+}
+
+.loginButton, .registerButton .logoutButton{
+  width: 165px;
+}
+
+
+/*
+li.formMsg {
+  font: 12px "Lucida Grande", "Lucida Sans", "Arial,sans-serif";
+  color: red;
+  
+}*/
+
+/*
+// over ride j
 .userButton
 {
   font-size: 12px;
   margin-bottom: 5px;
+} */
+
+
+li.formMsg {
+  //padding-top: 40px;
+  //padding-bottom: 5px;
+  list-style-type: none;
+  width: 150px;
+}
+
+span.fMsg {
+  color: gray;
 }
 
 #msgTousr
@@ -67,13 +109,28 @@ body{
   margin: 4px;
 }
 
-p#msg
+li.formMsg, p#msg
 {
   margin-top: 5px;
   font: 12px "Lucida Grande", "Lucida Sans", "Arial,sans-serif";
   color: #362b36;
+  //float: left;
+}
+
+p#msg {
   float: left;
 }
+
+/*Upon successful appointment reservation, this dialog is shown*/
+#reservationDialog {
+  display: none;
+}
+
+/*Upon successful user creation, this dialog is shown*/
+#regstDialog {
+  display: none;
+}
+
 
 /* Container of employee profiles
 .ui-employees
@@ -83,6 +140,10 @@ p#msg
   margin-bottom: 0;
   padding: 10px;
 } */
+
+img {
+  cursor: pointer;
+}
 
 .ui-employees .ChrisA {
   position: absolute;
@@ -179,11 +240,12 @@ lh.expertiseBullet
 {
   font-weight: bold;
   border-bottom: 1px solid #606060;
-  font-family: "Lucida Grande", "Lucida Sans", "Arial,sans-serif";
+  font-family: "Lucida Grande", "Lucida Sans", "Arial", "sans-serif";
 }
 
+
 /* Sets property to employee login and home button */
-#nav1, #nav2
+.empLoginButton, .homePageButton, .loginButton, .registerButton, .logoutButton
 {
   font-size: 12px;
 }

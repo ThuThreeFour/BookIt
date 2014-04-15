@@ -40,6 +40,7 @@
           e.preventDefault();
           window.location = "home.html";
         });
+        
       }); // end ready
     </script>
     <script>
@@ -47,7 +48,7 @@
       //http://stackoverflow.com/questions/4479268/getting-a-parameter-on-the-url
       function setDate() {
         var url = window.location.href; //Gets the URL from the address bar
-        var appointmentParams = url.split('&');//splits on each parameter passed from the calendar page
+        var appointmentParams = url.split('&'); //splits on each parameter passed from the calendar page
         var elem;
         var monthNames = {//http://stackoverflow.com/questions/1168807/how-can-i-add-a-key-value-pair-to-a-javascript-object-literal
           "1": "January",
@@ -63,7 +64,6 @@
           "11": "November",
           "12": "December"
         };
-
         //Set the hidden fields on the form
         //http://www.echoecho.com/htmlforms07.htm
         elem = document.getElementById("year");
@@ -87,7 +87,6 @@
         //http://stackoverflow.com/questions/7609130/set-the-value-of-a-input-field-with-javascript
         elem = document.getElementById("date");
         elem.innerHTML = appointmentParams[2].split('=')[1] + " " + monthNames[appointmentParams[1].split('=')[1]] + ", " + appointmentParams[0].split('=')[1];
-
         //Populate the time field on the form
         elem = document.getElementById("timeDisplay");
         if (appointmentParams[3].split('=')[1] < 1000)
@@ -150,7 +149,6 @@
           </div>
           <!-- Cancel button gets class cancel so the validator will ignore it -->
           <button class="cancel" id="cancel" name="cancel">Cancel</button>
-          <!-- Redirect to home page for now. -->
           <button type="submit" formaction="writeJson.php" formmethod="POST" id="submit" name="submit">Submit</button>
         </form>
       </div>
