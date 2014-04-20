@@ -5,6 +5,5 @@
 /nbproject/
 logs/
 /images/*Pic.png
-/clientInformation/ClientInformation.json
 /json/*.json
 /json/log.out
