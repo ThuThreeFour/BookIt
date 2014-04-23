@@ -112,7 +112,7 @@ function buildDay(date) {
     }
     else
     {
-      content += "<li class=\"timeListItem\"\>";
+      content += "<li class=\"timeListItemTaken\"\>";
     }
 
     //content += "<li class=\"timeListItem\" onmouseover=\"ChangeColor(this, true)\"";

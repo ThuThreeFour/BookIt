@@ -242,8 +242,10 @@ function getURL() {
 
   var loginSuccess = "?session=true";
 
-  //check for successful appointment reservation and popup dialog
-  if (href === "?reserve=success") {
+  //check for successful appointment reservation and popup a confirmation modal
+  //javascript regex matching found here:
+  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match
+  if (href.match(/reserve=success/)) {
     displayReserveSuccessDialog();
     return;
   }
@@ -298,13 +300,45 @@ function loginSession() {
 
 //Display a dialog upon successful appointment reservation
 function displayReserveSuccessDialog() {
-  var content = "<p>Thank you for reserving an appointment, reservation successful.</p>";
+  var timeStrings = {
+    "0800": "8am",
+    "0900": "9am",
+    "1000": "10am",
+    "1100": "11am",
+    "1200": "12pm",
+    "1300": "1pm",
+    "1400": "2pm",
+    "1500": "3pm",
+    "1600": "4pm",
+    "1700": "5pm"
+  }
+  var monthNames = {//http://stackoverflow.com/questions/1168807/how-can-i-add-a-key-value-pair-to-a-javascript-object-literal
+    "1": "January",
+    "2": "February",
+    "3": "March",
+    "4": "April",
+    "5": "May",
+    "6": "June",
+    "7": "July",
+    "8": "August",
+    "9": "September",
+    "10": "October",
+    "11": "November",
+    "12": "December"
+  };
+  var href = window.location.search;
+  var content = "";
+  var time = getURLParameter('time');
+  var day = getURLParameter('day');
+  var month = getURLParameter('month');
+  var year = getURLParameter('year');
+  
+  //Build the p tag to place in the modal
+  content += "<p>Thank you for reserving an appointment on ";
+  content += monthNames[month] + " " + day + ", " + year + " at " + timeStrings[time] + ".<p>";
 
-  console.log("Inside displayReserveSuccessDialog()");
-  console.log(content);
-
+  //place the p tag in the modal
   $("#reservationDialog").html(content);
-
   $("#reservationDialog").dialog({minWidth: 200, minHeight: 200,
     show: {
       effect: "fade",
@@ -320,7 +354,18 @@ function displayReserveSuccessDialog() {
   // http://stackoverflow.com/questions/16941104/remove-a-parameter-to-the-url-with-javascript
   // http://stackoverflow.com/questions/12832317/window-history-replacestate-example
   history.pushState({}, "New Title", removeParam("reserve"));
-  
+  history.pushState({}, "New Title", removeParam("day"));
+  history.pushState({}, "New Title", removeParam("month"));
+  history.pushState({}, "New Title", removeParam("year"));
+  history.pushState({}, "New Title", removeParam("time"));
+
+}
+
+//Courtesy of:
+// http://stackoverflow.com/questions/11582512/how-to-get-url-parameters-with-javascript
+//This function will pull specific parameters 
+function getURLParameter(name) {
+  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null
 }
 
 // Dialog box to let user know status of account registation.
@@ -355,7 +400,7 @@ function displayDialog(status) {
       effect: "fade",
       duration: 500
     }});
-  
+
   //Will make it so when the user refreshes the page, the dialog doesnt keep showing up
   //Courtesy of:
   // http://stackoverflow.com/questions/16941104/remove-a-parameter-to-the-url-with-javascript
