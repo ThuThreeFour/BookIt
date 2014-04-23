@@ -171,6 +171,16 @@ body, html
   border: 1px solid black;
   margin-top: 2px;
   margin-bottom: 2px;
+  background-color: #d7ebf9;
+  cursor: pointer;
+}
+
+.timeListItemTaken
+{
+  border: 1px solid black;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  background-color: #f2f5f7;
 }
 
 .ui-calendar-day .ui-widget-header

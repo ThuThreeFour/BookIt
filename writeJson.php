@@ -110,7 +110,7 @@ function reserveAppointment() {
 
   //Since we are done lets go home
   //http://us2.php.net/manual/en/function.header.php
-  header('Location: home.html?reserve=success');
+  header('Location: home.html?reserve=success&day=' . $_POST['day'] . '&month=' . $_POST['month'] . '&year=' . $_POST['year'] . '&time=' . $_POST['time']);
 }
 
 //Builds a default month json file
@@ -146,7 +146,7 @@ function writeDefaultMonth($month, $year, $f) {
   // Use our hack to properly format the JSON file.
   addToJSON($file, null, null, null, null, null, $f);
   return;
-  header('Location: home.html?reserve=success');
+  header('Location: home.html?reserve=success&day=' . $_POST['day'] . '&month=' . $_POST['month'] . '&year=' . $_POST['year'] . '&time=' . $_POST['time']);
 }
 
 function addToLog($string) {
