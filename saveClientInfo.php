@@ -22,16 +22,16 @@
   <body>  
     <?php
       // link to redirect to based on success of user data injection
-      $pageToRedirectTo = 'home.html?register=';
+      $pageToRedirectTo = 'home.php?register=';
       $registerFlag = 'false'; // registration data not yet injected so false
       
       // Append new form data in json string saved in json file
       // adds form data into an array
       $formdata = array(
-        'password'=> $_POST['password'],
         'fname' => $_POST['fname'],
         'lname' => $_POST['lname'],
         'email' => $_POST['email'],
+        'password'=> $_POST['password'],
         'phoneNum' => $_POST['phoneNum'],
         'sessionId' => '', // initially has no value until user is successfully injected into json
       ); 

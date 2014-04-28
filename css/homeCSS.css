@@ -11,6 +11,7 @@
 body{
   position: relative;
 }
+
 /* Sets the contents of top div containing banner and navigation menu. */
 #header 
 {
@@ -276,3 +277,10 @@ lh.expertiseBullet
     transform: scale(2);
     z-index: -999;
 }
+
+#errorContainer
+{
+  width: 165px;
+  color: red;
+}
+

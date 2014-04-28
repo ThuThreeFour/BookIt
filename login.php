@@ -1,3 +1,15 @@
+<?php
+  // setting cookie
+  //$name = $_SERVER["user"];
+  $expireTime = "10800 + time()"; // 10800 = 60sec * 60mins * 3hrs
+  setcookie("TestCookie", date("h:ia"), $expireTime);
+
+
+    session_start(); // if not logged in redirect back to home pages
+    if((!(isset($_SESSION["login"])) && ($_SESSION["login"] !== ""))){
+      header("Location: home.php");
+    }
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -20,14 +32,11 @@
   </head>
   
   <body>  
-    <?php
-     echo 'inside login.php';
-     $pageToRedirectTo = 'home.html?session=';
-     $sessionFlag = 'true'; // set flag to true
-     // redirect to homepage with proper flag
-     header('location: ' . $pageToRedirectTo . $sessionFlag);
-    ?>
-    
-    
+  <?PHP 
+    session_start();
+    if((isset($_SESSION["login"])) && ($_SESSION["login"] !== "")){
+      header("Location: home.php?session=true");
+    }
+  ?>
   </body>
 </html>

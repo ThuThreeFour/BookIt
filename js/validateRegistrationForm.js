@@ -124,12 +124,11 @@ function validateRegistrationForm() {
       }
     }, // end messages
     // Modify the default placement of the error
-    errorPlacement: function(error, element) {
+    errorPlacement: function(error, element) {    
       error.insertAfter(element); // This might be the default, but including for good measure
-      $("<div class='ui-icon ui-icon-alert'></div>").insertAfter(element);
-      error.addClass("ui-helper-reset ui-state-error-text");
+      $("<div class='ui-icon ui-icon-alert'></div>").insertBefore(element);
+      error.addClass("ui-helper-reset ui-state-error-text"); 
     }, // end errorPlacement
-    // Change the default behavior of highlighting the errors
     highlight: function(element, errorClass, validClass) {
       $(element).addClass(errorClass).removeClass(validClass);
       $(element).parent("div").addClass("ui-state-error");
@@ -141,14 +140,16 @@ function validateRegistrationForm() {
       $(element).parent("div").removeClass("ui-state-error");
       $(element).siblings("div").removeClass("ui-icon ui-icon-alert");
     } // end unhighlight
+   
   }); // end validate
 }
 
-
+/*
 // validate username and password feild on home.html
 function validateUserLogin() {
   console.log("inside user login validate");
-
+  
+/* unsuccessful attempt at validating user login info from user input with JSON info
   $.validator.addMethod("exist",
           function(value) {
             var userEmail;
@@ -180,12 +181,12 @@ function validateUserLogin() {
               }
             }
             return flag;
-          });
-
+          }); */
+/*
   $("#loginForm").validate({
     rules: {
       username: {
-        exist: true,
+        //exist: true, does not work!!g
         required: true
       },
       password: {
@@ -194,17 +195,24 @@ function validateUserLogin() {
     },
     messages: {
       username: {
-        exist: "Email or password in incorrect",
-        required: "Please provide an email address"
+        //exist: "Email or password in incorrect",
+        required: "username required"
       },
       password: {
-        required: "Please provide a password"
+        required: "password required"
       }
+    }, // end messages
+    // Modify the default placement of the error
+    errorPlacement: function(error, element) {    
+      error.insertBefore(element); // This might be the default, but including for good measure
+      $("<div class='ui-icon ui-icon-alert'></div>").insertBefore(element);
+      error.addClass("ui-helper-reset ui-state-error-text"); 
     }
-  });
+    
+  }); // end validate () 
 
 
-} // end validateUserLogin
+} // end validateUserLogin */
 
 //remove parameters from the URL so refreshing the page doesn't keep showing
 //a dialog message
@@ -273,11 +281,14 @@ function loginSession() {
   document.getElementById('login').style.display = "none";
   //document.getElementById('wrapper').style.display = "none";
 
-  var msg = "logged in as " + sessionName;
+  //var msg = "logged in as " + sessionName;
+  // not working line below
+  var msg = "logged in as <?php session_start; echo $_SESSION['user'];?>";
+  
   $("#sessionMsg").html(msg);
 
   $("li.registerButton").removeClass("registerButton").addClass("logoutButton");
-  document.getElementById('sessionLink').href = "home.html";
+  document.getElementById('sessionLink').href = "logout.php";
 
   var content = "Log out";
   $("#sessionLabel").html(content);
@@ -391,7 +402,8 @@ function displayDialog(status) {
   //Setting the UI effects for open/close here:
   //http://api.jqueryui.com/category/effects/
   //http://api.jqueryui.com/dialog/#option-hide
-  $("#regstDialog").dialog({minWidth: 200, minHeight: 200,
+ 
+  $("#regstDialog").dialog({minWidth: 200, minHeight: 200, modal: true,
     show: {
       effect: "fade",
       duration: 500
@@ -399,7 +411,7 @@ function displayDialog(status) {
     hide: {
       effect: "fade",
       duration: 500
-    }});
+    }}); 
 
   //Will make it so when the user refreshes the page, the dialog doesnt keep showing up
   //Courtesy of:
