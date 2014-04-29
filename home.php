@@ -29,14 +29,14 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
 
     <script src="js/jquery-ui/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
-    <!--script src="js/employeeDatajs.js" type="text/javascript"></script-->
+    <script src="js/employeeDatajs.js" type="text/javascript"></script>
     <script src="js/angular/controllers.js" type="text/javascript"></script>
-    <!-- DO NOT REMOVE THIS COMMENTED OUT LINE BELOW (sectionOfEmpDatajs.js) TT -->
-    <script src="../sectionOfEmpDatajs.js"></script>
+    <!-- DO NOT REMOVE THIS COMMENTED OUT LINE BELOW (sectionOfEmpDatajs.js) T.T. -->
+    <!--script src="../sectionOfEmpDatajs.js"></script-->
     <script src="js/jquery-validate/jquery.validate.min.js"></script>
     <script src="js/validateRegistrationForm.js"></script>
 
-    <!-- script src="js/make-calendar.js"></script -->
+    <script src="js/make-calendar.js"></script>
 
     <!-- The lines below is to link the css to this page. -->
     <link rel="stylesheet" type="text/css" href="css/cupertino/jquery-ui-1.10.4.custom.min.css">
