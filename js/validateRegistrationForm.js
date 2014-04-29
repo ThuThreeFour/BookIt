@@ -41,6 +41,7 @@ function validateRegistrationForm() {
   $.validator.addMethod("alreadyExist",
           function(value) {
             flag = true;
+            value = value.toLowerCase();
             console.log(value);
             for (var count = 0; count < userLoginInfo.length; count++) {
               //console.log(userLoginInfo.length);

@@ -4,7 +4,7 @@
       if(($_SERVER["REQUEST_URI"] == $homeURL) && (session_id() !== "")){
         header("Location: home.php?session=true");
       }
-    ?>
+?>
 <!DOCTYPE html>
 <html ng-app="employeeApp">
   <head>
@@ -29,10 +29,10 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
 
     <script src="js/jquery-ui/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
-    <script src="js/employeeDatajs.js" type="text/javascript"></script>
+    <!--script src="js/employeeDatajs.js" type="text/javascript"></script-->
     <script src="js/angular/controllers.js" type="text/javascript"></script>
     <!-- DO NOT REMOVE THIS COMMENTED OUT LINE BELOW (sectionOfEmpDatajs.js) TT -->
-    <!--script src="../sectionOfEmpDatajs.js"></script-->
+    <script src="../sectionOfEmpDatajs.js"></script>
     <script src="js/jquery-validate/jquery.validate.min.js"></script>
     <script src="js/validateRegistrationForm.js"></script>
 
@@ -172,10 +172,12 @@
             <button class="loginButton" type="submit">Log In</button>
           </div>
           <div id="signUp">
-            <div><?php echo $errorLog?></div>
+            <!--Line below is for testing purposes-->
+            <!--div--><!--?php echo $errorLog--><!--/div-->
             <ul class="nav">
               <li class="formMsg">
                 <span id="sessionMsg">
+                  <?php echo $errorLog;?>
                   <i>Don't have an account with us?</i>
                 </span>
               </li>
