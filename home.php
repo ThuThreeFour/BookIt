@@ -1,10 +1,3 @@
-<?php
-  session_start();
-      $homeURL = "home.php";
-      if(($_SERVER["REQUEST_URI"] == $homeURL) && (session_id() !== "")){
-        header("Location: home.php?session=true");
-      }
-?>
 <!DOCTYPE html>
 <html ng-app="employeeApp">
   <head>
@@ -35,8 +28,6 @@
     <!--script src="../sectionOfEmpDatajs.js"></script-->
     <script src="js/jquery-validate/jquery.validate.min.js"></script>
     <script src="js/validateRegistrationForm.js"></script>
-
-    <script src="js/make-calendar.js"></script>
 
     <!-- The lines below is to link the css to this page. -->
     <link rel="stylesheet" type="text/css" href="css/cupertino/jquery-ui-1.10.4.custom.min.css">
