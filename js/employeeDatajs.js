@@ -402,6 +402,6 @@ jQuery(document).ready(function() {
     );
   });
 
-    validateUserLogin();
+    //validateUserLogin();
     getURL();
 });
