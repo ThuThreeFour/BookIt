@@ -20,6 +20,7 @@
       Course: GUI Programming 1
       Email: thu_tran2@student.uml.edu
       Description: This page check result of user login and redirect to the appropriate link.
+      Code was modified from original source at http://www.homeandlearn.co.uk/php/php14p1.html.
       Updated: May 04, 2014
       (Documentation is a modification of Professor Jesse Heines's work.)
     -->

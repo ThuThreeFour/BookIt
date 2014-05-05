@@ -101,27 +101,23 @@ span.fMsg {
 }
 
 
-#msgTousr .ui-icon-info
-{
+#msgTousr .ui-icon-info {
   float: left;
 }
 
-#msgTousr .ui-state-highlight
-{
+#msgTousr .ui-state-highlight {
   margin: 0px auto 0px;
   height: 25px;
   width: 720px;
 }
 
 /* Over ride property to information icon. */
-#msgTousr .ui-icon
-{
+#msgTousr .ui-icon {
   margin: 4px;
 }
 
 /* Set properties to container of sessionMsg. */
-li.formMsg, p#msg
-{
+li.formMsg, p#msg {
   margin-top: 5px;
   font: 12px "Lucida Grande", "Lucida Sans", "Arial,sans-serif";
   color: #362b36;
