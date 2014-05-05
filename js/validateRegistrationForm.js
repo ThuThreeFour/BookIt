@@ -291,7 +291,7 @@ function loginSession() {
 
   //var msg = "logged in as " + sessionName;
   // not working line below
-  var msg = "You are now logged on";
+  var msg = "You are now logged in";
   
   $("#sessionMsg").html(msg); // display message to user
 
