@@ -1,20 +1,19 @@
 /* 
- * File: /~ttran/css/homeCSS.css
- * Authors: Thu Tran, UMass Lowell CompSci Student
+ * File: css/homeCSS.css
+ * Authors: Thu Tran, Chris Compton, UMass Lowell CompSci Students
  * Course: GUI Programming 2
- * Email: thu_tran2@student.uml.edu
- * Description: Styles home page of Book-It. Purpose of the style sheet follows. 
- * Updated: February 22, 2014
+ * Email: thu_tran2@student.uml.edu, christopher.j.compton@gmail.com
+ * Description: Style home page of Book-It. Purpose of the style sheet follows. 
+ * Updated: May 04, 2014
  * (Documentation is a modification of Jesse Heines's work.)
  */
 
-body{
+body {
   position: relative;
 }
 
 /* Sets the contents of top div containing banner and navigation menu. */
-#header 
-{
+#header {
   position: fixed;
   top: 0;
   left: 0;
@@ -24,38 +23,49 @@ body{
   z-index: 899;
 }
 
-#header #imgage
-{
+/* Sets property to Book-It image banner. */
+#header #imgage {
   margin-right: 5px;
 }
 
-#loginRegister
-{
+/* Set properties to container of user login field and account creation. */
+#loginRegister {
   position: absolute;
-  top: 10px;
-  right: 0px;
+  top: 2px;
+  right: 2px;
 }
 
-#login, #signUp{
+/* Sets property to divs contaning log in  and create new account information. */
+#login, #signUp {
   display: inline-block;
 }
 
-#red{background: red; width: 200px;height: 200px}
+#signUp {
+  margin-left:  -40px;
+}
 
+#red {
+  background: red; 
+  width: 200px;
+  height: 200px
+}
+
+/* Set properties to div containg login error message, login fields, login button. */
 #login {
   border-right: #888 solid 1px;
   padding: 2px;
 }
 
-
-#username, #password{
+/* Set properties to login input fields. */
+#username, #password {
   width: 162px;
+  margin-bottom: 4px;
 }
 
+/* Set properties to buttons. */
 .loginButton, .registerButton .logoutButton{
   width: 165px;
 }
-
 
 /*
 li.formMsg {
@@ -65,17 +75,16 @@ li.formMsg {
 }*/
 
 /*
-// over ride j
-.userButton
-{
+// over ride j 
+.userButton {
   font-size: 12px;
   margin-bottom: 5px;
 } */
 
-
+/* Set properties to container of sessionMsg. */
 li.formMsg {
-  //padding-top: 40px;
-  //padding-bottom: 5px;
+  /*padding-top: 40px;*/
+  /*padding-bottom: 5px;*/
   list-style-type: none;
   width: 150px;
 }
@@ -84,11 +93,11 @@ span.fMsg {
   color: gray;
 }
 
-#msgTousr
-{
+/* Set properties to container of inforamtion message to user. */
+#msgTousr {
   position: absolute;
   width: 100%;
-  top: 100px;
+  top: 120px;
 }
 
 
@@ -99,25 +108,27 @@ span.fMsg {
 
 #msgTousr .ui-state-highlight
 {
-  margin: 0 auto;
-  margin-top: 10px;
+  margin: 0px auto 0px;
   height: 25px;
   width: 720px;
 }
 
+/* Over ride property to information icon. */
 #msgTousr .ui-icon
 {
   margin: 4px;
 }
 
+/* Set properties to container of sessionMsg. */
 li.formMsg, p#msg
 {
   margin-top: 5px;
   font: 12px "Lucida Grande", "Lucida Sans", "Arial,sans-serif";
   color: #362b36;
-  //float: left;
+  /*float: left;*/
 }
 
+/* Sets property to info message. */
 p#msg {
   float: left;
 }
@@ -134,14 +145,14 @@ p#msg {
 
 
 /* Container of employee profiles
-.ui-employees
-{
+.ui-employees {
   width: 745px;
   margin: 145px auto;
   margin-bottom: 0;
   padding: 10px;
 } */
 
+/* Sets property to change cursor when hovering over image. */
 img {
   cursor: pointer;
 }
@@ -185,36 +196,32 @@ img {
   left: 20px;
 }
 
-.hidden
-{
+.hidden {
   visibility: hidden;
 }
 
-.ui-employees .ui-widget-header{
+.ui-employees .ui-widget-header {
   margin: 10px;
   height: 100px;
 }
 
-/* Container of individual employee profile */
-.ui-employees .emplyProfile
-{
-  //display: inline-block;
+/* Container of individual employee profile. */
+.ui-employees .emplyProfile {
+  /*display: inline-block;*/
   width: 220px;
-  //margin: 10px;
-  //border: 1px solid #dddddd;
+  /*margin: 10px;*/
+  /*border: 1px solid #dddddd;*/
   box-shadow: 10px 10px 5px #888;
 }
 
-.ui-employees .emplyProfileB
-{
+.ui-employees .emplyProfileB {
   width: 220px;
   height: 220px;
   box-shadow: 10px 10px 5px #888;
 }
 
-/* Set properties to employee pictures*/
-.ui-employees .pic
-{
+/* Set properties to employee pictures. */
+.ui-employees .pic {
   display: block;
   margin-top: 9px;
   margin-bottom: 9px;
@@ -225,43 +232,41 @@ img {
   box-shadow: 2px 2px 2px #888;
 }
 
-.ui-employees h1, .ui-employees h2{
+.ui-employees h1, .ui-employees h2 {
   margin: 10px;
 }
 
 /* Sets the <ul> tags properties for the navigation links menu. */
-ul.nav 
-{
+/*
+ul.nav {
   padding: 0;
   text-align: center;
-}
+} */
 
-/* Sets the properties to expertise list */
-lh.expertiseBullet
-{
+/* Sets the properties to expertise list. */
+lh.expertiseBullet {
   font-weight: bold;
   border-bottom: 1px solid #606060;
   font-family: "Lucida Grande", "Lucida Sans", "Arial", "sans-serif";
 }
 
 
-/* Sets property to employee login and home button */
-.empLoginButton, .homePageButton, .loginButton, .registerButton, .logoutButton
-{
+/* Sets property to text in buttons. */
+.empLoginButton, .homePageButton, .loginButton, .registerButton, .logoutButton {
   font-size: 12px;
 }
 
 
 /* Sets the properties to the bottom navigation links. */
-#footer
-{
+/*
+#footer {
   position: fixed;
   width: 100%;
   bottom: 0;
   left: 0;
   background: #deedf7;
   z-index: 899;
-}
+} */
 
 .ui-employees .primary {
   position: absolute;
@@ -270,17 +275,42 @@ lh.expertiseBullet
   z-index: -1;
 }
 
-#calendarDiv{
-    position: absolute;
-    top: 320px;
-    left: 700px;
-    transform: scale(2);
-    z-index: -999;
+
+#calendarDiv {
+  position: absolute;
+  top: 320px;
+  left: 700px;
+  transform: scale(2);
+  z-index: -999;
 }
 
-#errorContainer
-{
-  width: 165px;
-  color: red;
+/* Over ride property to container of login validation error message. */
+.ui-state-error {
+  border-radius: 6px;
+}
+
+
+/* Set properties to container of login validation error message. */
+#errorContainer {
+  width: 168px;
+  height: 32px;
+  background: transparent;
+  float: left;
+  font-family: Verdana,Arial,sans-serif;
+  font-weight: normal;
+  font-size: 12px;
+  padding-bottom: 4px;
+}
+
+/* Set properties to login validation error message. */
+#errorContainer .ui-icon-alert {
+  float: left;
+  margin-right: 3px;
+}
+
+/* Set properties to message above create new account button. */
+#sessionMsg {
+  font-style: italic;
+  margin-bottom: 4px;
 }
 

@@ -1,16 +1,14 @@
 /* 
- * validateRegistrationForm.js
- * Original Author: Christopher Compton
- * Email: christopher.j.compton@gmail.com
- * christopher_compton@student.uml.edu
- * Author: Thu Tran
- * Email: thu_tran2@student.uml.edu
- * Updated: March 22, 2014
+ * File: validateRegistrationForm.js
+ * Authors: Chris Compton, Thu Tran, Jacob Nappi, UMass Lowell CompSci Students
+ * Email: christopher.j.compton@gmail.com, thu_tran2@student.uml.edu, Jacob_Nappi@student.uml.edu
  * Undergraduate Students at UMass Lowell
  * 91.462 GUI Programming II
+ * Updated: May 04, 2014
  *
  */
 
+/* global variables */
 var userLoginInfo;
 var sessionName;
 var sessionID;
@@ -28,6 +26,8 @@ jQuery.ajax({
   }
 });
 
+
+/* To validate form fields in registrationForm.html */
 function validateRegistrationForm() {
 
   //console.log("inside registration validate");
@@ -37,7 +37,8 @@ function validateRegistrationForm() {
     if (event.keyCode === 10 || event.keyCode === 13)
       event.preventDefault();
   });
-
+  
+  // validate if email already exist in json file to avoid duplicate accounts
   $.validator.addMethod("alreadyExist",
           function(value) {
             flag = true;
@@ -125,27 +126,28 @@ function validateRegistrationForm() {
       }
     }, // end messages
     // Modify the default placement of the error
-    errorPlacement: function(error, element) {    
-      error.insertAfter(element); // This might be the default, but including for good measure
-      $("<div class='ui-icon ui-icon-alert'></div>").insertBefore(element);
-      error.addClass("ui-helper-reset ui-state-error-text"); 
+    errorPlacement: function( error, element ){
+      error.insertAfter( element ); // This might be the default, but including for good measure
+      $( "<div class='ui-icon ui-icon-alert'></div>" ).insertAfter( element );
+      error.addClass( "ui-helper-reset ui-state-error-text" );
     }, // end errorPlacement
-    highlight: function(element, errorClass, validClass) {
-      $(element).addClass(errorClass).removeClass(validClass);
-      $(element).parent("div").addClass("ui-state-error");
-      $(element).siblings("div").addClass("ui-icon ui-icon-alert");
+    // Change the default behavior of highlighting the errors
+    highlight: function( element, errorClass, validClass ){
+      $( element ).addClass( errorClass ).removeClass( validClass );
+      $( element ).parent( "div" ).addClass( "ui-state-error" );
+      $( element ).siblings( "div" ).addClass( "ui-icon ui-icon-alert" );
     }, // end highlight
     // When a field is valid, adjust how it is unhighlighted.
-    unhighlight: function(element, errorClass, validClass) {
-      $(element).removeClass(errorClass).addClass(validClass);
-      $(element).parent("div").removeClass("ui-state-error");
-      $(element).siblings("div").removeClass("ui-icon ui-icon-alert");
+    unhighlight: function( element, errorClass, validClass ){
+      $( element ).removeClass( errorClass ).addClass( validClass );
+      $( element ).parent( "div" ).removeClass( "ui-state-error" );
+      $( element ).siblings( "div" ).removeClass( "ui-icon ui-icon-alert" );
     } // end unhighlight
    
   }); // end validate
 }
 
-/*
+/* code below no longer needed since moved to php for user credential validation
 // validate username and password feild on home.html
 function validateUserLogin() {
   console.log("inside user login validate");
@@ -240,16 +242,16 @@ function removeParam(parameter)
   return url;
 }
 
-// get the url
+// get the current url inorder to display correct dialong box
 function getURL() {
   var status = false;
-  var href = window.location.search;
+  var href = window.location.search; // gets url before ?
   console.log(href);
 
   var regstSuccess = "?register=true"; // account successfully created
   var regstfail = "?register=false"; // account unsuccessfully created
 
-  var loginSuccess = "?session=true";
+  var loginSuccess = "?session=true"; // login successfully
 
   //check for successful appointment reservation and popup a confirmation modal
   //javascript regex matching found here:
@@ -262,33 +264,40 @@ function getURL() {
   if (href === regstSuccess) {
     //console.log("success");
     status = true;
-    displayDialog(status);
+    // upon successful registration dialog box will display appropriate message
+    displayDialog(status); 
     return;
   }
 
   if (href === regstfail) {
     //console.log("fail");
+    // account registration fail dialog box will display appropriate message
     displayDialog(status);
     return;
   }
 
   if (href === loginSuccess) {
+    // login on with correct credential dialog box will display appropriate message
     loginSession();
   }
 }
 
+
+/* Mimic login session by disabling user login form */
 function loginSession() {
   console.log("disable form");
-  document.getElementById('login').style.display = "none";
+  document.getElementById('login').style.display = "none"; // diable form
   //document.getElementById('wrapper').style.display = "none";
 
   //var msg = "logged in as " + sessionName;
   // not working line below
-  var msg = "logged in as <?php session_start; echo $_SESSION['user'];?>";
+  var msg = "You are now logged on";
   
-  $("#sessionMsg").html(msg);
+  $("#sessionMsg").html(msg); // display message to user
 
+  //change create new account button to be log out button
   $("li.registerButton").removeClass("registerButton").addClass("logoutButton");
+  // and also change link to reflect log out session
   document.getElementById('sessionLink').href = "logout.php";
 
   var content = "Log out";
@@ -380,7 +389,7 @@ function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null
 }
 
-// Dialog box to let user know status of account registation.
+// Dialog box to let user know status of account and form registation.
 function displayDialog(status) {
   var content = "";
 
